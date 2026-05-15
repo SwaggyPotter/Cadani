@@ -1,0 +1,14 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = 'SEO Content' } = Astro.props;
+---
+
+<section class="section" aria-labelledby="seo-content-heading">
+  <div class="container stack">
+    <h2 id="seo-content-heading">{label}</h2>
+    <p>Platzhalter fuer spaeteren SEO Content.</p>
+  </div>
+</section>

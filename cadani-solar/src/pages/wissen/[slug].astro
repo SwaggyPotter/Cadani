@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SeoContentPlaceholder from '@components/sections/SeoContentPlaceholder.astro';
+
+export function getStaticPaths() {
+  return [];
+}
+
+const { slug } = Astro.params;
+const title = 'Wissen Detailseite | Cadani Solar';
+const description = 'Meta Description Platzhalter fuer eine Wissen Detailseite.';
+const h1 = `H1 Platzhalter Wissen: ${slug ?? 'slug'}`;
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content">
+    <article class="section" aria-labelledby="page-heading">
+      <div class="container stack">
+        <h1 id="page-heading">{h1}</h1>
+        <p>Platzhalter fuer spaetere Ratgeberinhalte.</p>
+      </div>
+    </article>
+
+    <SeoContentPlaceholder label="SEO Content Wissen" />
+  </main>
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SeoContentPlaceholder from '@components/sections/SeoContentPlaceholder.astro';
+
+export function getStaticPaths() {
+  return [];
+}
+
+const { stadtteil } = Astro.params;
+const title = 'Berlin Stadtteil | Cadani Solar';
+const description = 'Meta Description Platzhalter fuer eine Berliner Stadtteilseite.';
+const h1 = `H1 Platzhalter Berlin: ${stadtteil ?? 'stadtteil'}`;
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content">
+    <section class="section" aria-labelledby="page-heading">
+      <div class="container stack">
+        <h1 id="page-heading">{h1}</h1>
+        <p>Platzhalter fuer spaetere lokale SEO-Inhalte fuer Berliner Stadtteile.</p>
+      </div>
+    </section>
+
+    <SeoContentPlaceholder label="SEO Content Berlin Stadtteil" />
+  </main>
+</BaseLayout>
