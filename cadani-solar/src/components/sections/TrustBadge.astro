@@ -1,0 +1,15 @@
+---
+interface Props {
+  source: string;
+  rating: string;
+  detail: string;
+}
+
+const { source, rating, detail } = Astro.props;
+---
+
+<article class="trust-badge">
+  <p class="trust-badge__source">{source}</p>
+  <h3 class="trust-badge__rating">{rating}</h3>
+  <p class="trust-badge__detail">{detail}</p>
+</article>

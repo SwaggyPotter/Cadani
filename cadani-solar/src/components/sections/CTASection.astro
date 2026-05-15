@@ -1,0 +1,45 @@
+---
+interface CtaAction {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+  external?: boolean;
+}
+
+interface Props {
+  title: string;
+  text: string;
+  actions: CtaAction[];
+}
+
+const { title, text, actions } = Astro.props;
+---
+
+<section class="cta-section" aria-labelledby="cta-section-title">
+  <div class="cta-section__inner">
+    <div>
+      <p class="cta-section__eyebrow">Jetzt starten</p>
+      <h2 id="cta-section-title">{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-section__actions" aria-label="Kontakt aufnehmen">
+      {
+        actions.map((action) => (
+          <a
+            class:list={[
+              'cta-section__button',
+              action.variant === 'secondary'
+                ? 'cta-section__button--secondary'
+                : 'cta-section__button--primary',
+            ]}
+            href={action.href}
+            target={action.external ? '_blank' : undefined}
+            rel={action.external ? 'noopener noreferrer' : undefined}
+          >
+            {action.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+
+interface HeroAction {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+  external?: boolean;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle: string;
+  text?: string;
+  image: string;
+  imageAlt: string;
+  actions?: HeroAction[];
+}
+
+const { eyebrow, title, subtitle, text, image, imageAlt, actions = [] } = Astro.props;
+---
+
+<section class="page-hero" aria-labelledby="page-hero-title">
+  <div class="page-hero__inner">
+    <div class="page-hero__content">
+      {eyebrow && <p class="page-hero__eyebrow">{eyebrow}</p>}
+      <h1 class="page-hero__title" id="page-hero-title">{title}</h1>
+      <p class="page-hero__subtitle">{subtitle}</p>
+      {text && <p class="page-hero__text">{text}</p>}
+
+      {
+        actions.length > 0 && (
+          <div class="page-hero__actions" aria-label="Direkte Kontaktmöglichkeiten">
+            {actions.map((action) => (
+              <a
+                class:list={[
+                  'page-hero__button',
+                  action.variant === 'secondary'
+                    ? 'page-hero__button--secondary'
+                    : 'page-hero__button--primary',
+                ]}
+                href={action.href}
+                target={action.external ? '_blank' : undefined}
+                rel={action.external ? 'noopener noreferrer' : undefined}
+              >
+                {action.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    <figure class="page-hero__media">
+      <Image
+        class="page-hero__image"
+        src={image}
+        alt={imageAlt}
+        width={920}
+        height={690}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </figure>
+  </div>
+</section>

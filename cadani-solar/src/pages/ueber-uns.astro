@@ -1,0 +1,333 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTASection from '@components/sections/CTASection.astro';
+import PageHero from '@components/sections/PageHero.astro';
+import ProcessSteps from '@components/sections/ProcessSteps.astro';
+import SectionHeader from '@components/sections/SectionHeader.astro';
+import TrustBadge from '@components/sections/TrustBadge.astro';
+import '@styles/pages/about.css';
+
+const title = 'Über Cadani Solar | Photovoltaik Berlin & Brandenburg';
+const description =
+  'Lernen Sie Cadani Solarinstallation kennen – Ihr regionaler Fachbetrieb für Photovoltaik, Speicher und Wallboxen in Berlin und Brandenburg.';
+
+const heroImage = 'https://cdn1.site-media.eu/images/1200/11578691/Dachinstallation.png';
+const foundersImage =
+  'https://cdn1.site-media.eu/images/1599/16451368/PHOTO-2025-05-23-18-47-44-Qegf4BbTSCvNRyvrOapcug.jpg';
+
+const services = [
+  {
+    title: 'Beratung',
+    text: 'Persönliche Einschätzung zu Dach, Verbrauch, Speicherbedarf und wirtschaftlicher Umsetzung.',
+  },
+  {
+    title: 'Planung',
+    text: 'Individuelle Auslegung der PV-Anlage inklusive Komponenten, Ertrag und Eigenverbrauch.',
+  },
+  {
+    title: 'Montage',
+    text: 'Fachgerechte Installation Ihrer Photovoltaikanlage mit zuverlässigen Handwerks- und Elektropartnern.',
+  },
+  {
+    title: 'Speicher',
+    text: 'Stromspeicher für mehr Eigenverbrauch, bessere Unabhängigkeit und smarte Energienutzung.',
+  },
+  {
+    title: 'Wallbox',
+    text: 'Ladelösungen für Elektroautos, passend zur PV-Anlage und Ihrem Alltag.',
+  },
+  {
+    title: 'Anmeldung & Dokumentation',
+    text: 'Netzbetreiberanmeldung, MaStR-Registrierung, Bautagebuch und Unterlagen für Ihr Projekt.',
+  },
+];
+
+const moduleBrands = ['AIKO', 'Trina', 'JA Solar', 'Jinko', 'LONGi'];
+const systemBrands = ['Huawei', 'Sungrow', 'SMA', 'Fronius', 'BYD'];
+
+const processSteps = [
+  {
+    title: 'Anfrage & Erstberatung',
+    text: 'Wir klären Ihr Ziel, Ihre Ausgangssituation und die nächsten Schritte.',
+  },
+  {
+    title: 'Dach- und Verbrauchsanalyse',
+    text: 'Dachfläche, Zählerschrank, Verbrauch und mögliche Speicherlösung werden geprüft.',
+  },
+  {
+    title: 'Individuelle Planung',
+    text: 'Sie erhalten eine passende technische Auslegung und ein nachvollziehbares Angebot.',
+  },
+  {
+    title: 'Montage der Anlage',
+    text: 'Die PV-Anlage wird fachgerecht montiert und elektrisch vorbereitet.',
+  },
+  {
+    title: 'Anmeldung & Inbetriebnahme',
+    text: 'Cadani begleitet Netzbetreiberanmeldung, MaStR-Registrierung und Inbetriebnahme.',
+  },
+  {
+    title: 'Betreuung nach Projektabschluss',
+    text: 'Auch nach der Übergabe bleiben wir für Fragen, Wartung und Erweiterungen erreichbar.',
+  },
+];
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Cadani Solarinstallation GmbH',
+  url: 'https://www.cadani-solar.de/ueber-uns',
+  email: 'info@cadani-solar.de',
+  telephone: '+493022454816',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Mahlsdorfer Str. 61B',
+    postalCode: '15366',
+    addressLocality: 'Hoppegarten',
+    addressRegion: 'Brandenburg',
+    addressCountry: 'DE',
+  },
+  areaServed: ['Berlin', 'Brandenburg', 'Hoppegarten'],
+  foundingDate: '2023',
+  founder: [
+    { '@type': 'Person', name: 'Nico Kurzweil' },
+    { '@type': 'Person', name: 'David Rusinowski' },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content" class="about-page">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+    <PageHero
+      eyebrow="Über Cadani"
+      title="Über Cadani Solar"
+      subtitle="Ihr regionaler Fachbetrieb für Photovoltaik in Berlin und Brandenburg"
+      text="Cadani Solarinstallation GmbH ist ein Familienunternehmen aus Hoppegarten, das Photovoltaik-Projekte persönlich, transparent und vollständig begleitet: von der ersten Beratung bis zur fertigen Anlage."
+      image={heroImage}
+      imageAlt="Dachinstallation einer Photovoltaikanlage durch Cadani Solar in Berlin und Brandenburg"
+      actions={[
+        { label: 'Kostenlose Beratung anfragen', href: '/kontakt/' },
+        {
+          label: 'Direkt per WhatsApp schreiben',
+          href: 'https://wa.me/4915206341767',
+          variant: 'secondary',
+          external: true,
+        },
+      ]}
+    />
+
+    <section class="about-section" aria-labelledby="about-intro-title">
+      <div class="about-section__inner about-intro">
+        <SectionHeader
+          id="about-intro-title"
+          eyebrow="Unsere Haltung"
+          title="Photovoltaik aus Überzeugung"
+        />
+        <div class="about-intro__text">
+          <p>
+            Cadani Solarinstallation ist ein erfahrener Partner für Beratung, Planung und
+            Installation von Solaranlagen. Wir bieten alles aus einer Hand und begleiten Kundinnen
+            und Kunden von der ersten Idee bis zur fertigen Anlage.
+          </p>
+          <p>
+            Unser Anspruch ist eine Lösung, die technisch passt, wirtschaftlich sinnvoll ist und im
+            Alltag zuverlässig funktioniert. Dazu gehören Photovoltaik-Anlagen, Stromspeicher,
+            Wallboxen, Energiemanagement, Backup-Lösungen und bei Bedarf die Modernisierung des
+            Zählerschranks.
+          </p>
+          <div class="about-intro__links" aria-label="Weiterführende Links">
+            <a href="/">Startseite</a>
+            <a href="/produkte">Produkte</a>
+            <a href="/angebot_Solaranlage">Konfigurator</a>
+            <a href="/zertifikate">Zertifikate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section about-section--muted" aria-labelledby="about-founders-title">
+      <div class="about-section__inner about-founders">
+        <figure class="about-founders__media">
+          <Image
+            class="about-founders__image"
+            src={foundersImage}
+            alt="Montage einer Photovoltaikanlage durch Cadani Solar"
+            width={900}
+            height={675}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div>
+          <SectionHeader
+            id="about-founders-title"
+            eyebrow="Familienunternehmen"
+            title="Zwei Brüder für Ihre Solaranlage"
+            text="Nico Kurzweil und David Rusinowski gründeten Cadani Solarinstallation im Jahr 2023."
+          />
+          <div class="about-copy">
+            <p>
+              Aus ihrer Erfahrung als Vertriebspartner für Energieprodukte entstand ein Fachbetrieb,
+              der Solarprojekte nicht nur verkauft, sondern von der Beratung über Planung und
+              Montage bis zur Anmeldung vollständig begleitet.
+            </p>
+            <p>
+              Als regionales und familiär geführtes Unternehmen sind wir persönlich erreichbar,
+              verbindlich in der Kommunikation und zuverlässig in der Umsetzung. Kundinnen und
+              Kunden erhalten bei Cadani klare Ansprechpartner statt anonymer Projektketten.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-services-title">
+      <div class="about-section__inner">
+        <SectionHeader
+          id="about-services-title"
+          eyebrow="Leistungen"
+          title="Alles, was Ihre PV-Anlage braucht"
+          text="Von der ersten Idee bis zur Dokumentation im Bautagebuch: Cadani begleitet Ihr Projekt strukturiert und vollständig."
+        />
+        <div class="about-services">
+          {
+            services.map((service, index) => (
+              <article class="about-service-card">
+                <span class="about-service-card__icon" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section about-section--green" aria-labelledby="about-brands-title">
+      <div class="about-section__inner">
+        <SectionHeader
+          id="about-brands-title"
+          eyebrow="Herstellerunabhängig"
+          title="Die passende Technik für jedes Dach"
+          text="Cadani arbeitet herstellerunabhängig und wählt Komponenten passend zu Dach, Verbrauch und Budget. So entsteht keine Lösung von der Stange, sondern ein System, das wirklich zum Projekt passt."
+        />
+        <div class="about-brands">
+          <article class="about-brand-group">
+            <h3>Module je nach Projekt</h3>
+            <ul class="about-brand-list">
+              {moduleBrands.map((brand) => <li>{brand}</li>)}
+            </ul>
+          </article>
+          <article class="about-brand-group">
+            <h3>Wechselrichter, Speicher und Energiemanagement</h3>
+            <ul class="about-brand-list">
+              {systemBrands.map((brand) => <li>{brand}</li>)}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-trust-title">
+      <div class="about-section__inner">
+        <SectionHeader
+          id="about-trust-title"
+          eyebrow="Vertrauen"
+          title="Bewertungen ohne externe Widgets"
+          text="Wir zeigen Bewertungsdaten bewusst statisch an und laden keine externen Bewertungsskripte beim Seitenstart."
+        />
+        <div class="about-trust-grid">
+          <TrustBadge source="Google Reviews" rating="4,9 / 5" detail="64 Bewertungen" />
+          <TrustBadge source="Trustlocal" rating="9,6 / 10" detail="67 Bewertungen" />
+        </div>
+        <p class="about-trust-note">
+          Externe Bewertungswidgets werden nicht automatisch geladen. Eine spätere Integration kann
+          DSGVO-bewusst per Lazy-Load oder Consent-Lösung ergänzt werden.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-section about-section--muted" aria-labelledby="about-process-title">
+      <div class="about-section__inner">
+        <SectionHeader
+          id="about-process-title"
+          eyebrow="Ablauf"
+          title="So läuft Ihr Solarprojekt mit Cadani ab"
+          text="Ein klarer Prozess sorgt dafür, dass Technik, Anmeldung und Umsetzung sauber ineinandergreifen."
+        />
+        <ProcessSteps steps={processSteps} />
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-local-title">
+      <div class="about-section__inner about-local">
+        <div>
+          <SectionHeader
+            id="about-local-title"
+            eyebrow="Regional"
+            title="Solarinstallation in Berlin und Brandenburg"
+            text="Cadani Solarinstallation betreut private und gewerbliche Kunden in Berlin, Hoppegarten und Brandenburg."
+          />
+          <div class="about-copy">
+            <p>
+              Wer nach Photovoltaik Berlin, Solaranlage Berlin oder einem Solarteur Berlin sucht,
+              braucht einen Partner, der die Region kennt und die technischen Abläufe zuverlässig
+              koordiniert.
+            </p>
+            <p>
+              Für PV-Anlage Brandenburg und Solarinstallation Berlin Brandenburg unterstützt Cadani
+              bei Netzbetreiberanmeldung bei Stromnetz Berlin und E.DIS, MaStR-Registrierung,
+              Fördermöglichkeiten wie SolarPLUS / IBB und vollständiger Projektdokumentation.
+            </p>
+          </div>
+        </div>
+
+        <aside class="about-local__contact" aria-labelledby="about-contact-title">
+          <h3 id="about-contact-title">Kontaktinformationen</h3>
+          <address>
+            <strong>Cadani Solarinstallation GmbH</strong>
+            <span>Mahlsdorfer Str. 61B</span>
+            <span>15366 Hoppegarten</span>
+          </address>
+          <dl class="about-contact-list">
+            <div>
+              <dt>Telefon Büro</dt>
+              <dd><a href="tel:+493022454816">030 22454816</a></dd>
+            </div>
+            <div>
+              <dt>WhatsApp</dt>
+              <dd><a href="https://wa.me/4915206341767">01520 6341767</a></dd>
+            </div>
+            <div>
+              <dt>E-Mail</dt>
+              <dd><a href="mailto:info@cadani-solar.de">info@cadani-solar.de</a></dd>
+            </div>
+          </dl>
+          <p>
+            <a class="about-link-button" href="/kontakt/">Kontaktseite öffnen</a>
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <CTASection
+      title="Bereit für Ihre eigene Solaranlage?"
+      text="Jetzt unverbindlich beraten lassen und gemeinsam prüfen, welche Photovoltaik-Lösung zu Ihrem Dach, Verbrauch und Budget passt."
+      actions={[
+        { label: 'Angebot anfragen', href: '/kontakt/' },
+        {
+          label: 'WhatsApp öffnen',
+          href: 'https://wa.me/4915206341767',
+          variant: 'secondary',
+          external: true,
+        },
+        { label: 'Anrufen', href: 'tel:+493022454816', variant: 'secondary' },
+      ]}
+    />
+  </main>
+</BaseLayout>
