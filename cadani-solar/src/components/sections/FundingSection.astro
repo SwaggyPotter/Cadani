@@ -1,0 +1,56 @@
+---
+import { fundingDocuments } from '@data/funding';
+---
+
+<section class="funding" aria-labelledby="funding-heading">
+  <!-- TODO: Bild später lokal in public/images/backgrounds speichern und als WebP/AVIF optimieren -->
+  <div class="funding__overlay" aria-hidden="true"></div>
+
+  <div class="container funding__inner">
+    <div class="funding__content">
+      <h2 class="funding__title" id="funding-heading">
+        Aktuelle Förderungen nutzen – wir unterstützen bei der Antragstellung
+      </h2>
+      <div class="funding__separator" aria-hidden="true"></div>
+
+      <div class="funding__text">
+        <h3 class="funding__subtitle">SolarPLUS des Landes Berlin</h3>
+        <p>
+          Mit SolarPLUS fördert das Land Berlin die Installation von Photovoltaikanlagen auf Dächern von
+          Wohn- und Nichtwohngebäuden – optional auch mit Speicher und Wallbox. Cadani unterstützt Sie
+          dabei von Anfang an: Wir prüfen die Förderfähigkeit und begleiten die Antragstellung, damit Ihre
+          PV-Anlage schnell und sauber umgesetzt werden kann.
+        </p>
+
+        <p class="funding__notice">
+          Förderprogramme und Richtlinien können sich ändern. Die verlinkten Dokumente dienen als erste
+          Orientierung und sollten vor Antragstellung geprüft werden.
+        </p>
+      </div>
+
+      <div class="funding__documents">
+        <h3 class="funding__subtitle">SolarPLUS Dokumente</h3>
+
+        <div class="funding__actions" aria-label="SolarPLUS PDF-Dokumente">
+          {
+            fundingDocuments.map((document) => (
+              <a
+                class="button button--primary funding__button"
+                href={document.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={document.ariaLabel}
+              >
+                {document.label}
+                <span aria-hidden="true">PDF</span>
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- TODO: Förderungs-Unterseite später mit aktuellen Informationen ausbauen -->
+        <a class="funding__more-link" href="/foerderung/">Mehr zu Förderungen</a>
+      </div>
+    </div>
+  </div>
+</section>
