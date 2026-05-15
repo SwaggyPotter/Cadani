@@ -33,7 +33,7 @@
 .references-gallery__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(var(--space-md), 3vw, var(--space-xl));
+  gap: clamp(var(--space-lg), 3vw, var(--space-xl));
 }
 
 .references-gallery__item {
@@ -51,27 +51,19 @@
 }
 
 .references-gallery__button {
-  position: relative;
-  display: block;
+  display: grid;
+  gap: var(--space-md);
   width: 100%;
   overflow: hidden;
-  border: 0;
+  height: 100%;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 0;
-  background: var(--color-surface-muted);
-  box-shadow: 0 18px 50px rgb(7 27 51 / 0.12);
+  padding: var(--space-sm);
+  background: var(--color-white);
+  box-shadow: 0 14px 36px rgb(7 27 51 / 0.1);
   color: inherit;
   cursor: zoom-in;
   text-align: start;
-}
-
-.references-gallery__button::after {
-  position: absolute;
-  inset: 0;
-  content: '';
-  background: linear-gradient(180deg, transparent 42%, rgb(7 27 51 / 0.72));
-  opacity: 0.9;
-  pointer-events: none;
 }
 
 .references-gallery__button:hover .references-gallery__image,
@@ -86,33 +78,32 @@
 
 .references-gallery__image {
   width: 100%;
-  min-height: 18rem;
-  max-height: 34rem;
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  border-radius: calc(var(--radius-lg) - var(--space-sm));
   object-fit: cover;
   transition: transform 420ms ease;
 }
 
 .references-gallery__caption {
-  position: absolute;
-  inset-inline: var(--space-md);
-  inset-block-end: var(--space-md);
-  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2xs) var(--space-sm);
   align-items: baseline;
-  color: var(--color-text-inverse);
+  padding-inline: var(--space-xs);
+  padding-block-end: var(--space-xs);
+  color: var(--color-text);
 }
 
 .references-gallery__caption strong {
   flex-basis: 100%;
-  color: var(--color-text-inverse);
-  font-size: var(--font-size-lg);
+  color: var(--color-blue-950);
+  font-size: var(--font-size-md);
   line-height: var(--line-height-heading);
 }
 
 .references-gallery__caption span {
-  color: rgb(255 255 255 / 0.82);
+  color: var(--color-text-muted);
   font-size: var(--font-size-sm);
   font-weight: 700;
 }
@@ -217,7 +208,7 @@
   }
 
   .references-gallery__item:nth-child(3n + 1) .references-gallery__image {
-    min-height: 24rem;
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -226,9 +217,12 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .references-gallery__item:nth-child(4n + 2) .references-gallery__image,
+  .references-gallery__item:nth-child(4n + 2) .references-gallery__image {
+    aspect-ratio: 1 / 1;
+  }
+
   .references-gallery__item:nth-child(4n + 3) .references-gallery__image {
-    min-height: 28rem;
+    aspect-ratio: 3 / 4;
   }
 }
 

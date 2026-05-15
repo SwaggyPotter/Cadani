@@ -1,0 +1,141 @@
+.tibber-partner {
+  background:
+    radial-gradient(circle at 86% 18%, rgb(0 122 255 / 0.12), transparent 22rem),
+    linear-gradient(180deg, #f6fbff, #f2fbf7);
+  color: var(--color-text);
+}
+
+.tibber-partner__inner {
+  display: grid;
+  gap: clamp(var(--space-xl), 6vw, var(--space-4xl));
+  width: min(100% - (var(--container-padding) * 2), var(--container-lg));
+  margin-inline: auto;
+  padding-block: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+}
+
+.tibber-partner__content {
+  display: grid;
+  gap: var(--space-lg);
+  align-content: center;
+}
+
+.tibber-partner__eyebrow {
+  max-width: none;
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.tibber-partner__title {
+  max-width: 14ch;
+  color: var(--color-blue-950);
+}
+
+.tibber-partner__subheadline {
+  max-width: 36rem;
+  color: var(--color-blue-900);
+  font-size: var(--font-size-lg);
+  font-weight: 750;
+  line-height: var(--line-height-heading);
+}
+
+.tibber-partner__text {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.tibber-partner__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tibber-partner__benefits li {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid rgb(31 157 122 / 0.18);
+  border-radius: var(--radius-full);
+  background: rgb(255 255 255 / 0.8);
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+.tibber-partner__button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--space-lg);
+  border-radius: var(--radius-full);
+  background: #0052ff;
+  box-shadow: 0 14px 30px rgb(0 82 255 / 0.22);
+  color: var(--color-text-inverse);
+  font-weight: 850;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.tibber-partner__button:hover {
+  background: #003fd0;
+  box-shadow: 0 18px 38px rgb(0 82 255 / 0.28);
+  transform: translateY(-0.0625rem);
+}
+
+.tibber-partner__button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.tibber-partner__card {
+  display: grid;
+  gap: var(--space-lg);
+  align-content: center;
+  min-height: 22rem;
+  padding: clamp(var(--space-xl), 5vw, var(--space-3xl));
+  border: 1px solid rgb(255 255 255 / 0.7);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.88), rgb(235 246 255 / 0.86)),
+    rgb(255 255 255 / 0.9);
+  box-shadow: 0 24px 70px rgb(7 27 51 / 0.13);
+}
+
+.tibber-partner__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  padding: var(--space-lg);
+  border-radius: 1.125rem;
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.tibber-partner__logo {
+  width: min(100%, 21rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.tibber-partner__card p {
+  max-width: 30rem;
+  margin-inline: auto;
+  color: var(--color-blue-900);
+  font-weight: 750;
+  text-align: center;
+}
+
+@media (min-width: 64rem) {
+  .tibber-partner__inner {
+    grid-template-columns: minmax(0, 0.95fr) minmax(24rem, 1.05fr);
+    align-items: center;
+  }
+}

@@ -1,0 +1,67 @@
+---
+import '@styles/components/tibber-partner-section.css';
+
+const benefits = ['Dynamische Strompreise', 'Ökostrom', 'Smart-Home-Integration'];
+const tibberUrl = 'https://tibber.com/de/invite/Cadani2025';
+---
+
+<section class="tibber-partner" aria-labelledby="tibber-partner-heading">
+  <div class="tibber-partner__inner">
+    <div class="tibber-partner__content">
+      <p class="tibber-partner__eyebrow">Stromtarif & Smart Energy</p>
+      <h2 class="tibber-partner__title" id="tibber-partner-heading">Unser Partner Tibber</h2>
+      <p class="tibber-partner__subheadline">
+        Dynamischer Ökostrom für eine smartere Energienutzung
+      </p>
+
+      <div class="tibber-partner__text">
+        <p>
+          Tibber bringt frischen Wind in den deutschen Strommarkt: Als digitaler Anbieter für Ökostrom
+          setzt das Unternehmen auf flexible, dynamische Tarife und moderne Technologie.
+        </p>
+        <p>
+          Mit intelligenten Tools und cleveren Automatisierungen unterstützt Tibber seine Kundinnen und
+          Kunden dabei, den eigenen Energieverbrauch bewusster zu steuern – transparent, umweltfreundlich
+          und kosteneffizient.
+        </p>
+        <p>
+          Besonders spannend: Tibber verdient nicht am Stromverbrauch selbst, sondern legt den Fokus auf
+          smarte Energienutzung. Das passt ideal zu modernen Photovoltaiklösungen, Speichern und einem
+          bewussten Umgang mit Energie.
+        </p>
+      </div>
+
+      <ul class="tibber-partner__benefits" aria-label="Tibber Vorteile">
+        {
+          benefits.map((benefit) => (
+            <li>{benefit}</li>
+          ))
+        }
+      </ul>
+
+      <a
+        class="tibber-partner__button"
+        href={tibberUrl}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+      >
+        Mehr erfahren über Tibber
+      </a>
+    </div>
+
+    <aside class="tibber-partner__card" aria-label="Tibber Partnerinformation">
+      <div class="tibber-partner__logo-wrap">
+        <img
+          class="tibber-partner__logo"
+          src="/images/partners/tibber-logo-electricblue-2024.png"
+          alt="Tibber Logo – Partner von Cadani Solar"
+          width="420"
+          height="160"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <p>Digitaler Ökostromtarif für Haushalte, Speicher und smarte Energienutzung.</p>
+    </aside>
+  </div>
+</section>
