@@ -1,26 +1,51 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
-import SeoContentPlaceholder from '@components/sections/SeoContentPlaceholder.astro';
+import BreadcrumbSchema from '@components/seo/BreadcrumbSchema.astro';
+import ContactCtaSection from '@components/sections/ContactCtaSection.astro';
+import FaqSection from '@components/sections/FaqSection.astro';
+import ReferencesPreview from '@components/sections/ReferencesPreview.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { brandenburgRegions, type RegionLandingPage } from '@data/regions';
 
 export function getStaticPaths() {
-  return [];
+  return brandenburgRegions.map((region) => ({
+    params: {
+      ort: region.slug,
+    },
+    props: {
+      region,
+    },
+  }));
 }
 
-const { ort } = Astro.params;
-const title = 'Brandenburg Ort | Cadani Solar';
-const description = 'Meta Description Platzhalter fuer eine Brandenburger Ortsseite.';
-const h1 = `H1 Platzhalter Brandenburg: ${ort ?? 'ort'}`;
+interface Props {
+  region: RegionLandingPage;
+}
+
+const { region } = Astro.props;
+const breadcrumbs = [
+  { label: 'Regionen', href: '/regionen/' },
+  { label: 'Brandenburg', href: '/regionen/brandenburg/' },
+  { label: region.city },
+];
+
+const breadcrumbSchemaItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Brandenburg', href: '/regionen/brandenburg/' },
+  { label: region.city, href: region.href },
+];
 ---
 
-<BaseLayout title={title} description={description}>
-  <main id="main-content">
-    <section class="section" aria-labelledby="page-heading">
-      <div class="container stack">
-        <h1 id="page-heading">{h1}</h1>
-        <p>Platzhalter fuer spaetere lokale SEO-Inhalte fuer Orte in Brandenburg.</p>
-      </div>
-    </section>
+<PageLayout title={region.metaTitle} description={region.metaDescription} h1={region.h1} breadcrumbs={breadcrumbs}>
+  <BreadcrumbSchema items={breadcrumbSchemaItems} />
 
-    <SeoContentPlaceholder label="SEO Content Brandenburg Ort" />
-  </main>
-</BaseLayout>
+  <section class="section" aria-labelledby="regional-content-heading">
+    <div class="container stack">
+      <h2 id="regional-content-heading">Regionale Informationen</h2>
+      <p>{region.seoText}</p>
+    </div>
+  </section>
+
+  <ReferencesPreview title={`Referenzen in ${region.city}`} references={region.references} />
+  <FaqSection title={`Fragen zu Photovoltaik in ${region.city}`} items={region.faq} />
+  <ContactCtaSection {...region.cta} />
+</PageLayout>
