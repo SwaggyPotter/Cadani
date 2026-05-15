@@ -1,20 +1,41 @@
 ---
-import Button from '@components/ui/Button.astro';
-
-interface Props {
-  title: string;
-  text?: string;
-  ctaLabel?: string;
-  ctaHref?: string;
-}
-
-const { title, text, ctaLabel, ctaHref } = Astro.props;
+const ctaHref = '/#kontakt';
 ---
 
-<section class="section hero-section" aria-labelledby="hero-heading">
-  <div class="container stack">
-    <h1 id="hero-heading">{title}</h1>
-    {text && <p>{text}</p>}
-    {ctaLabel && ctaHref && <Button href={ctaHref} label={ctaLabel} />}
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <div class="hero__icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" focusable="false">
+          <path d="M32 6v8" />
+          <path d="M32 50v8" />
+          <path d="M6 32h8" />
+          <path d="M50 32h8" />
+          <path d="m13.6 13.6 5.7 5.7" />
+          <path d="m44.7 44.7 5.7 5.7" />
+          <path d="m50.4 13.6-5.7 5.7" />
+          <path d="m19.3 44.7-5.7 5.7" />
+          <circle cx="32" cy="32" r="11" />
+          <path d="M23 41h18l6 10H17l6-10Z" />
+        </svg>
+      </div>
+
+      <h1 class="hero__title" id="hero-heading">
+        <span>Cadani Solarinstallation GmbH</span>
+        <span>Das Familienunternehmen</span>
+        <span>aus Berlin und Brandenburg</span>
+      </h1>
+
+      <div class="hero__actions">
+        <a class="button button--primary hero__cta" href={ctaHref}>
+          <span>Jetzt unverbindlich anfragen</span>
+          <span class="hero__cta-icon" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <a class="hero__scroll" href="#partners" aria-label="Zum Partnerbereich scrollen">
+      <span aria-hidden="true">↓</span>
+    </a>
   </div>
 </section>

@@ -1,0 +1,42 @@
+---
+import { partners } from '@data/partners';
+
+const isExternalLink = (href: string) => href.startsWith('http');
+---
+
+<section class="partners" id="partners" aria-labelledby="partners-heading">
+  <div class="container partners__inner">
+    <h2 class="partners__title" id="partners-heading">Unsere Partner</h2>
+
+    <!-- TODO: Partnerlogos später lokal in public/images/partners speichern -->
+    <ul class="partners__grid">
+      {
+        partners.map((partner) => {
+          const external = isExternalLink(partner.href);
+
+          return (
+            <li class="partners__item">
+              <a
+                class="partners__link"
+                href={partner.href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                aria-label={partner.name}
+              >
+                <img
+                  class="partners__logo"
+                  src={partner.logo}
+                  alt={partner.alt}
+                  width="220"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
