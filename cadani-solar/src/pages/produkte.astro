@@ -1,0 +1,121 @@
+﻿---
+import ProductCategoryNav from '@components/products/ProductCategoryNav.astro';
+import ProductCategorySection from '@components/sections/ProductCategorySection.astro';
+import ProductConsultingCta from '@components/sections/ProductConsultingCta.astro';
+import ProductHero from '@components/sections/ProductHero.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { productCategories, productCategoryCount, productCount } from '@data/products';
+
+const title = 'Photovoltaik-Produkte & Datenblätter | Cadani Solar Berlin & Brandenburg';
+const description =
+  'Übersicht ausgewählter Photovoltaik-Komponenten von Cadani Solar: Solarmodule, Wechselrichter, Stromspeicher, Wallboxen, Montagesysteme und Datenblätter für PV-Anlagen in Berlin und Brandenburg.';
+const canonical = 'https://www.cadani-solar.de/produkte';
+const ogTitle = 'Photovoltaik-Produkte & Komponenten | Cadani Solar';
+const ogDescription =
+  'Solarmodule, Speicher, Wechselrichter, Wallboxen und Montagesysteme für moderne PV-Anlagen in Berlin und Brandenburg.';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Photovoltaik-Produkte & Komponenten',
+  description,
+  url: canonical,
+  mainEntity: {
+    '@type': 'ItemList',
+    name: 'Produktkategorien für Photovoltaikanlagen',
+    numberOfItems: productCategoryCount,
+    itemListElement: productCategories.map((category, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: category.title,
+      url: `${canonical}#${category.id}`,
+      item: {
+        '@type': 'ItemList',
+        name: category.title,
+        numberOfItems: category.products.length,
+        itemListElement: category.products.map((product, productIndex) => ({
+          '@type': 'ListItem',
+          position: productIndex + 1,
+          name: product.name,
+          url: product.datasheetUrl,
+        })),
+      },
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogTitle={ogTitle}
+  ogDescription={ogDescription}
+  type="website"
+>
+  <main id="main-content">
+    <ProductHero />
+
+    <section class="product-intro section" aria-labelledby="product-intro-heading">
+      <div class="container product-intro__inner">
+        <div class="product-intro__content">
+          <p class="product-intro__eyebrow">{productCount} Komponenten in {productCategoryCount} Kategorien</p>
+          <h2 id="product-intro-heading">Komponenten für moderne Photovoltaikanlagen</h2>
+          <p>
+            Eine leistungsstarke Photovoltaikanlage besteht nicht nur aus Solarmodulen. Erst das Zusammenspiel aus
+            Modulen, Wechselrichter, Speicher, Wallbox, Montagesystem und Energiemanagement entscheidet darüber, wie
+            effizient Solarstrom erzeugt, gespeichert und genutzt werden kann. Cadani Solarinstallation unterstützt
+            private Haushalte und Gewerbekunden bei der Auswahl passender Komponenten für Dachfläche, Stromverbrauch,
+            Speicherbedarf und zukünftige Erweiterungen.
+          </p>
+          <p>
+            Für Photovoltaik Berlin, Solaranlage Berlin und Solaranlage Brandenburg prüfen wir Komponenten nicht
+            isoliert, sondern als abgestimmtes System. Das gilt auch für PV-Anlage Berlin, Stromspeicher Berlin und
+            Wallbox Berlin, wenn spätere Erweiterungen oder E-Mobilität eingeplant werden sollen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <ProductCategoryNav categories={productCategories} />
+
+    {productCategories.map((category) => <ProductCategorySection category={category} />)}
+
+    <ProductConsultingCta />
+  </main>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+</BaseLayout>
+
+<style>
+  .product-intro {
+    background: var(--color-white);
+  }
+
+  .product-intro__inner {
+    display: grid;
+  }
+
+  .product-intro__content {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 55rem;
+  }
+
+  .product-intro__eyebrow {
+    color: var(--color-success);
+    font-size: var(--font-size-sm);
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .product-intro h2 {
+    max-width: 18ch;
+    color: var(--color-blue-950);
+  }
+
+  .product-intro p {
+    color: var(--color-text-muted);
+  }
+</style>
+
+

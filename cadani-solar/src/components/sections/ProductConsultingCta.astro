@@ -1,0 +1,103 @@
+﻿---
+
+---
+
+<section class="product-consulting" aria-labelledby="product-consulting-title">
+  <div class="container product-consulting__inner">
+    <div class="product-consulting__content">
+      <p class="product-consulting__eyebrow">Beratung statt Produktliste</p>
+      <h2 id="product-consulting-title">Welche Komponenten passen zu Ihrer Solaranlage?</h2>
+      <p>
+        Nicht jedes Produkt passt zu jedem Dach, Verbrauchsprofil oder Speicherziel. Cadani Solarinstallation berät
+        Sie individuell und plant Ihre PV-Anlage passend zu Gebäude, Budget und Energiebedarf.
+      </p>
+    </div>
+    <div class="product-consulting__actions" aria-label="Beratung und Planung starten">
+      <a class="button button--primary" href="/#kontakt">Beratung anfragen</a>
+      <a class="button button--secondary" href="/check">PV-Check starten</a>
+      <a class="button button--secondary" href="/angebot_Solaranlage">Solaranlage konfigurieren</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-consulting {
+    background: var(--color-blue-950);
+    color: var(--color-text-inverse);
+  }
+
+  .product-consulting__inner {
+    display: grid;
+    gap: var(--space-xl);
+    padding-block: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+  }
+
+  .product-consulting__content {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 54rem;
+  }
+
+  .product-consulting__eyebrow {
+    color: var(--color-yellow-400);
+    font-size: var(--font-size-sm);
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .product-consulting h2 {
+    max-width: 16ch;
+    color: var(--color-text-inverse);
+  }
+
+  .product-consulting p {
+    color: rgb(255 255 255 / 0.84);
+  }
+
+  .product-consulting__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: stretch;
+  }
+
+  .product-consulting__actions .button {
+    width: 100%;
+  }
+
+  .product-consulting__actions .button--secondary {
+    border-color: rgb(255 255 255 / 0.24);
+    background: transparent;
+    color: var(--color-text-inverse);
+  }
+
+  .product-consulting__actions .button--secondary:hover,
+  .product-consulting__actions .button--secondary:focus-visible {
+    border-color: var(--color-yellow-400);
+    color: var(--color-yellow-400);
+  }
+
+  @media (min-width: 48rem) {
+    .product-consulting__actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .product-consulting__actions .button {
+      width: fit-content;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .product-consulting__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
+
+    .product-consulting__actions {
+      justify-content: flex-end;
+    }
+  }
+</style>
+

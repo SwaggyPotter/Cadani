@@ -1,0 +1,599 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/ui/Button.astro';
+
+const title = 'Strom & Gas Beratung Berlin & Brandenburg | Cadani Solar';
+const description =
+  'Cadani Solar berät Sie zu Strom- und Gastarifen in Berlin und Brandenburg. Jetzt Tarif anfragen, Energiekosten prüfen lassen und sparen.';
+
+const benefits = [
+  {
+    title: 'Unabhängige Beratung',
+    text: 'Wir prüfen Strom- und Gastarife anbieterunabhängig und erklären transparent, worauf es bei Vertragslaufzeit, Preisbestandteilen und Konditionen ankommt.',
+  },
+  {
+    title: 'Tarifvergleich',
+    text: 'Für Ihren Stromtarif in Berlin oder einen passenden Gastarif in Brandenburg vergleichen wir verfügbare Optionen anhand Ihrer Angaben.',
+  },
+  {
+    title: 'Persönliche Betreuung',
+    text: 'Sie erhalten keine anonyme Standardauswertung, sondern eine nachvollziehbare Empfehlung und einen festen Ansprechpartner.',
+  },
+  {
+    title: 'Unterstützung beim Wechsel',
+    text: 'Wenn Sie den Stromanbieter wechseln möchten, begleiten wir die nächsten Schritte und achten auf einen geordneten Übergang.',
+  },
+  {
+    title: 'Energieberatung aus einer Hand',
+    text: 'Cadani Solar verbindet Tarifberatung mit Erfahrung aus Photovoltaik, Speicher, Wallbox und moderner Energieberatung Berlin Brandenburg.',
+  },
+];
+
+const processSteps = [
+  {
+    title: 'Anfrage senden',
+    text: 'Sie übermitteln uns Ihre Kontaktdaten, den aktuellen Anbieter und Verbrauchswerte. Je genauer die Angaben, desto belastbarer ist die Prüfung.',
+  },
+  {
+    title: 'Tarifangebot erhalten',
+    text: 'Wir prüfen passende Strom- und Gastarife, ordnen Preisbestandteile ein und zeigen Ihnen transparent, welche Option sinnvoll sein kann.',
+  },
+  {
+    title: 'Wechseln und sparen',
+    text: 'Wenn ein Wechsel für Sie passt, unterstützen wir die Vorbereitung. Die konkrete Ersparnis hängt vom aktuellen Vertrag, Verbrauch und Tarifmarkt ab.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description} image="/images/sections/solar-faq-background.jpg">
+  <main id="main-content" class="energy-page">
+    <section class="energy-hero" aria-labelledby="page-heading">
+      <div class="container energy-hero__grid">
+        <div class="energy-hero__content">
+          <p class="eyebrow">Strom & Gas</p>
+          <h1 id="page-heading">Strom & Gas Beratung</h1>
+          <p class="energy-hero__lead">Günstige und saubere Energie für Ihr Zuhause</p>
+          <p>
+            Cadani Solar unterstützt Haushalte in Berlin und Brandenburg bei der Strom Beratung Berlin,
+            der Gas Tarifberatung Berlin und beim strukturierten Vergleich aktueller Energietarife.
+            Ziel ist eine transparente Entscheidung, mit der Sie Energiekosten sparen können, ohne
+            übertriebene Versprechen oder unklare Vertragsdetails.
+          </p>
+          <div class="energy-hero__actions" aria-label="Direkte Aktionen">
+            <Button href="#tarif-anfragen" label="Jetzt Tarif anfragen" />
+            <Button href="#vertriebspartner" label="Vertriebspartner werden" variant="secondary" />
+            <a class="energy-hero__whatsapp" href="https://wa.me/490000000000" rel="noopener noreferrer">
+              Beratung per WhatsApp
+            </a>
+          </div>
+        </div>
+        <figure class="energy-hero__media" aria-label="Energieberatung für Strom und Gas">
+          <img
+            src="/images/sections/solar-faq-background.jpg"
+            alt="Solaranlage auf einem Dach als Symbol für moderne Energieberatung"
+            width="1200"
+            height="800"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <figcaption>
+            Tarifberatung, Photovoltaik und Energieberatung aus einer Hand.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section energy-intro" aria-labelledby="intro-heading">
+      <div class="container energy-intro__grid">
+        <div class="stack">
+          <p class="eyebrow">Tarife transparent prüfen</p>
+          <h2 id="intro-heading">Anbieterunabhängige Beratung für Strom- und Gastarife</h2>
+        </div>
+        <div class="energy-intro__text">
+          <p>
+            Viele Strom- und Gasverträge werden über Jahre nicht aktiv geprüft. Dabei können sich
+            Verbrauch, Preisstruktur und Marktangebote deutlich verändern. Cadani Solar analysiert Ihre
+            Angaben und unterstützt Sie dabei, passende Optionen für Stromtarif Berlin, Gastarif
+            Brandenburg und regionale Energieversorgung realistisch einzuordnen.
+          </p>
+          <p>
+            Im Mittelpunkt stehen persönliche Beratung, klare Vergleichbarkeit und transparente
+            Wechseloptionen. Wir zeigen Einsparpotenzial, weisen aber auch auf Grenzen hin: Die konkrete
+            Ersparnis hängt vom aktuellen Vertrag, Verbrauch und Tarifmarkt ab.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section energy-benefits" aria-labelledby="benefits-heading">
+      <div class="container stack">
+        <div class="energy-section-header">
+          <p class="eyebrow">Ihre Vorteile</p>
+          <h2 id="benefits-heading">Strom- und Gastarife mit klarem Blick vergleichen</h2>
+          <p>
+            Unsere Beratung verbindet Marktüberblick mit der Erfahrung aus moderner Gebäudetechnik und
+            erneuerbarer Energie.
+          </p>
+        </div>
+        <div class="energy-benefits__grid">
+          {
+            benefits.map((benefit) => (
+              <article class="energy-card">
+                <span class="energy-card__icon" aria-hidden="true">✓</span>
+                <h3>{benefit.title}</h3>
+                <p>{benefit.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="ablauf" class="section energy-process" aria-labelledby="process-heading">
+      <div class="container stack">
+        <div class="energy-section-header">
+          <p class="eyebrow">In 3 Schritten</p>
+          <h2 id="process-heading">Zum günstigen Strom- & Gastarif</h2>
+          <p>
+            Der Ablauf ist bewusst schlank gehalten, damit Sie Ihre Energiekosten prüfen lassen können,
+            ohne sich selbst durch unübersichtliche Tarifdetails arbeiten zu müssen.
+          </p>
+        </div>
+        <ol class="energy-process__list">
+          {
+            processSteps.map((step, index) => (
+              <li class="energy-process__item">
+                <span class="energy-process__number">{index + 1}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="tarif-anfragen" class="section energy-form-section" aria-labelledby="tariff-form-heading">
+      <div class="container energy-form-section__grid">
+        <div class="energy-form-section__content">
+          <p class="eyebrow">Tarifanfrage</p>
+          <h2 id="tariff-form-heading">Jetzt Tarif anfragen</h2>
+          <p>
+            Senden Sie uns Ihre Eckdaten. Wir bereiten die Struktur für eine spätere Backend-Anbindung
+            bereits sauber vor und prüfen Ihre Anfrage persönlich.
+          </p>
+          <p class="energy-note">
+            Bitte halten Sie nach Möglichkeit Ihre letzte Strom- oder Gasabrechnung bereit. Dadurch
+            lassen sich Verbrauch und aktueller Arbeitspreis besser einordnen.
+          </p>
+        </div>
+        <form class="energy-form" method="post" action="#" aria-label="Tarifanfrage Strom und Gas">
+          <div class="energy-form__grid">
+            <label>
+              Vorname
+              <input type="text" name="first_name" autocomplete="given-name" required />
+            </label>
+            <label>
+              Nachname
+              <input type="text" name="last_name" autocomplete="family-name" required />
+            </label>
+            <label>
+              Telefon
+              <input type="tel" name="phone" autocomplete="tel" required />
+            </label>
+            <label>
+              E-Mail
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Aktueller Stromanbieter
+              <input type="text" name="current_provider" autocomplete="organization" />
+            </label>
+            <label>
+              Jahresverbrauch kWh
+              <input type="number" name="annual_consumption_kwh" min="0" inputmode="numeric" />
+            </label>
+            <label>
+              Aktueller Preis Cent/kWh
+              <input type="number" name="current_price_cent_kwh" min="0" step="0.01" inputmode="decimal" />
+            </label>
+            <label>
+              Straße
+              <input type="text" name="street" autocomplete="street-address" />
+            </label>
+            <label>
+              Postleitzahl
+              <input type="text" name="postal_code" autocomplete="postal-code" inputmode="numeric" />
+            </label>
+            <label>
+              Ort
+              <input type="text" name="city" autocomplete="address-level2" />
+            </label>
+            <label class="energy-form__wide">
+              Nachricht / Haus oder Wohnung / Anzahl Zähler
+              <textarea name="message" rows="5"></textarea>
+            </label>
+          </div>
+          <label class="energy-form__privacy">
+            <input type="checkbox" name="privacy" required />
+            <span>
+              Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der
+              Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.
+            </span>
+          </label>
+          <button class="button button--primary" type="submit">Tarifanfrage senden</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="vertriebspartner" class="section partner-section" aria-labelledby="partner-heading">
+      <div class="container partner-section__grid">
+        <div class="stack">
+          <p class="eyebrow">Karriere im Energievertrieb</p>
+          <h2 id="partner-heading">Vertriebspartner werden</h2>
+        </div>
+        <div class="partner-section__content">
+          <p>
+            Energie ist ein Zukunftsmarkt. Als Vertriebspartner von Cadani Solar sprechen Sie mit
+            Interessenten über Strom, Gas, Photovoltaik und moderne Energielösungen in Berlin und
+            Brandenburg. Das kann als Nebenjob starten oder perspektivisch zum Hauptberuf werden.
+          </p>
+          <p>
+            Wir suchen Menschen, die seriös beraten, verbindlich kommunizieren und langfristige
+            Kundenbeziehungen aufbauen möchten. Erfahrung im Energievertrieb ist hilfreich, aber nicht
+            die einzige Voraussetzung.
+          </p>
+          <Button href="#bewerbung" label="Jetzt bewerben" />
+        </div>
+      </div>
+    </section>
+
+    <section id="bewerbung" class="section application-section" aria-labelledby="application-heading">
+      <div class="container energy-form-section__grid">
+        <div class="energy-form-section__content">
+          <p class="eyebrow">Bewerbung</p>
+          <h2 id="application-heading">Ihr Einstieg als Vertriebspartner</h2>
+          <p>
+            Senden Sie uns eine kurze Nachricht zu Ihrer Motivation und möglichen Verfügbarkeit. Wir
+            melden uns anschließend persönlich bei Ihnen.
+          </p>
+        </div>
+        <form class="energy-form" method="post" action="#" aria-label="Bewerbung als Vertriebspartner">
+          <div class="energy-form__grid">
+            <label>
+              Vorname
+              <input type="text" name="application_first_name" autocomplete="given-name" required />
+            </label>
+            <label>
+              Nachname
+              <input type="text" name="application_last_name" autocomplete="family-name" required />
+            </label>
+            <label>
+              Telefon
+              <input type="tel" name="application_phone" autocomplete="tel" required />
+            </label>
+            <label>
+              E-Mail
+              <input type="email" name="application_email" autocomplete="email" required />
+            </label>
+            <label class="energy-form__wide">
+              Nachricht
+              <textarea name="application_message" rows="5" required></textarea>
+            </label>
+          </div>
+          <label class="energy-form__privacy">
+            <input type="checkbox" name="application_privacy" required />
+            <span>
+              Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der
+              Verarbeitung meiner Angaben zur Bearbeitung der Bewerbung zu.
+            </span>
+          </label>
+          <button class="button button--primary" type="submit">Bewerbung senden</button>
+        </form>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .energy-page {
+    background: var(--color-white);
+  }
+
+  .energy-hero {
+    overflow: hidden;
+    padding-block: clamp(var(--space-2xl), 8vw, var(--space-4xl));
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.97), rgb(245 247 250 / 0.88)),
+      linear-gradient(180deg, var(--color-white), var(--color-surface-muted));
+  }
+
+  .energy-hero__grid,
+  .energy-intro__grid,
+  .energy-form-section__grid,
+  .partner-section__grid {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+  }
+
+  .energy-hero__grid {
+    align-items: center;
+  }
+
+  .energy-hero__content {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .energy-hero h1 {
+    max-width: 12ch;
+    color: var(--color-blue-950);
+  }
+
+  .energy-hero__lead {
+    color: var(--color-success);
+    font-size: var(--font-size-lg);
+    font-weight: 750;
+  }
+
+  .energy-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .energy-hero__whatsapp {
+    color: var(--color-success);
+    font-weight: 750;
+    text-decoration-color: rgb(23 120 95 / 0.35);
+    text-underline-offset: 0.25em;
+  }
+
+  .energy-hero__media {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .energy-hero__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .energy-hero__media figcaption {
+    padding: var(--space-md);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 650;
+  }
+
+  .energy-intro {
+    background: var(--color-white);
+  }
+
+  .energy-intro__text,
+  .partner-section__content {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .energy-benefits,
+  .application-section {
+    background: var(--color-surface-muted);
+  }
+
+  .energy-section-header {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 52rem;
+  }
+
+  .energy-section-header h2 {
+    max-width: 20ch;
+    color: var(--color-blue-950);
+  }
+
+  .energy-benefits__grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .energy-card {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .energy-card__icon {
+    display: inline-flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgb(31 157 122 / 0.1);
+    color: var(--color-success);
+    font-weight: 800;
+  }
+
+  .energy-card h3,
+  .energy-process__item h3 {
+    color: var(--color-blue-950);
+  }
+
+  .energy-process__list {
+    display: grid;
+    gap: var(--space-md);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .energy-process__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .energy-process__number {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--color-success);
+    color: var(--color-text-inverse);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .energy-form-section {
+    background: var(--color-blue-950);
+    color: var(--color-text-inverse);
+  }
+
+  .energy-form-section h2,
+  .energy-form-section p {
+    color: inherit;
+  }
+
+  .energy-form-section .eyebrow {
+    color: var(--color-yellow-400);
+  }
+
+  .energy-form-section__content {
+    display: grid;
+    gap: var(--space-md);
+    align-content: start;
+  }
+
+  .energy-note {
+    padding: var(--space-md);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: var(--radius-sm);
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  .energy-form {
+    display: grid;
+    gap: var(--space-lg);
+    padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .energy-form__grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .energy-form label {
+    display: grid;
+    gap: var(--space-xs);
+    color: var(--color-text);
+    font-weight: 750;
+  }
+
+  .energy-form input,
+  .energy-form textarea {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    background: var(--color-white);
+    color: var(--color-text);
+  }
+
+  .energy-form input:focus,
+  .energy-form textarea:focus {
+    border-color: rgb(31 157 122 / 0.55);
+    outline: 3px solid rgb(247 201 72 / 0.32);
+    outline-offset: 0;
+  }
+
+  .energy-form textarea {
+    resize: vertical;
+  }
+
+  .energy-form__privacy {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    font-weight: 500;
+  }
+
+  .energy-form__privacy input {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-block-start: 0.25rem;
+  }
+
+  .energy-form__privacy a {
+    color: var(--color-primary);
+    font-weight: 800;
+  }
+
+  .partner-section {
+    background: var(--color-white);
+  }
+
+  .partner-section h2 {
+    color: var(--color-blue-950);
+  }
+
+  @media (min-width: 48rem) {
+    .energy-benefits__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .energy-form__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .energy-form__wide {
+      grid-column: 1 / -1;
+    }
+
+    .energy-process__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .energy-process__item {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .energy-hero__grid,
+    .energy-form-section__grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(28rem, 1.05fr);
+    }
+
+    .energy-intro__grid,
+    .partner-section__grid {
+      grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+      align-items: start;
+    }
+
+    .energy-benefits__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

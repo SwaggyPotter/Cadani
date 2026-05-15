@@ -1,0 +1,83 @@
+﻿---
+import ProductCard from '@components/products/ProductCard.astro';
+import type { ProductCategory } from '@data/products';
+
+interface Props {
+  category: ProductCategory;
+}
+
+const { category } = Astro.props;
+---
+
+<section class="product-category" id={category.id} aria-labelledby={`${category.id}-heading`}>
+  <div class="container product-category__inner">
+    <header class="product-category__header">
+      <p class="product-category__eyebrow">{category.label}</p>
+      <h2 id={`${category.id}-heading`}>{category.title}</h2>
+      <p>{category.intro}</p>
+    </header>
+    <div class="product-category__grid">
+      {category.products.map((product) => <ProductCard product={product} categoryLabel={category.label} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-category {
+    scroll-margin-top: 8rem;
+    border-block-start: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+
+  .product-category:nth-of-type(even) {
+    background: var(--color-surface-muted);
+  }
+
+  .product-category__inner {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+    padding-block: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+  }
+
+  .product-category__header {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 52rem;
+  }
+
+  .product-category__eyebrow {
+    color: var(--color-success);
+    font-size: var(--font-size-sm);
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .product-category h2 {
+    max-width: none;
+    color: var(--color-blue-950);
+  }
+
+  .product-category__header p:last-child {
+    max-width: 76ch;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
+  }
+
+  .product-category__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .product-category__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .product-category__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
+

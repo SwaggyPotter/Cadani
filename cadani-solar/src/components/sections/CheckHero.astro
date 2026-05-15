@@ -1,0 +1,139 @@
+---
+import Button from '@components/ui/Button.astro';
+
+interface Badge {
+  label: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  primaryHref: string;
+  secondaryHref: string;
+  badges?: Badge[];
+}
+
+const { title, subtitle, primaryHref, secondaryHref, badges = [] } = Astro.props;
+---
+
+<header class="check-hero" aria-labelledby="page-heading">
+  <div class="container check-hero__grid">
+    <div class="check-hero__content">
+      <p class="eyebrow">Der Solar-Check</p>
+      <h1 id="page-heading">{title}</h1>
+      <p class="check-hero__lead">{subtitle}</p>
+      <p class="check-hero__trust">Für Berlin, Brandenburg und Umgebung</p>
+      <div class="check-hero__actions" aria-label="Solarangebot prüfen lassen">
+        <Button href={primaryHref} label="Angebot hochladen" />
+        <Button href={secondaryHref} label="Per WhatsApp anfragen" variant="secondary" />
+      </div>
+      {
+        badges.length > 0 && (
+          <ul class="check-hero__badges" aria-label="Vorteile des Solar-Checks">
+            {badges.map((badge) => (
+              <li>{badge.label}</li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    <figure class="check-hero__media">
+      <img
+        src="/images/sections/solar-check-hero.png"
+        alt="Photovoltaik-Anlage auf einem Dach in Berlin"
+        width="1200"
+        height="800"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </figure>
+  </div>
+</header>
+
+<style>
+  .check-hero {
+    overflow: hidden;
+    padding-block: clamp(var(--space-2xl), 8vw, var(--space-4xl));
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.96), rgb(245 247 250 / 0.9)),
+      linear-gradient(180deg, var(--color-white), var(--color-surface-muted));
+  }
+
+  .check-hero__grid {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+    align-items: center;
+  }
+
+  .check-hero__content {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .check-hero h1 {
+    max-width: 14ch;
+    color: var(--color-blue-950);
+  }
+
+  .check-hero__lead {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: 650;
+  }
+
+  .check-hero__trust {
+    width: fit-content;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid rgb(31 157 122 / 0.22);
+    border-radius: var(--radius-full);
+    background: rgb(31 157 122 / 0.08);
+    color: var(--color-success);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+  }
+
+  .check-hero__actions,
+  .check-hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .check-hero__badges {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .check-hero__badges li {
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 750;
+  }
+
+  .check-hero__media {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .check-hero__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (min-width: 64rem) {
+    .check-hero__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(27rem, 0.95fr);
+    }
+  }
+</style>

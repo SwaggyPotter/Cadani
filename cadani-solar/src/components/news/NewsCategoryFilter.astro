@@ -1,0 +1,54 @@
+---
+interface Props {
+  categories: readonly string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<nav class="news-filter" aria-label="Newskategorien">
+  <ul>
+    {
+      categories.map((category, index) => (
+        <li>
+          <a class={index === 0 ? 'is-active' : undefined} href={index === 0 ? '/news' : `/news?category=${encodeURIComponent(category)}`}>
+            {category}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .news-filter ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .news-filter a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding-inline: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-white);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .news-filter a:hover,
+  .news-filter a:focus-visible,
+  .news-filter a.is-active {
+    border-color: rgb(31 157 122 / 0.35);
+    background: rgb(31 157 122 / 0.08);
+    color: var(--color-success);
+  }
+</style>

@@ -1,0 +1,138 @@
+﻿---
+const trustItems = [
+  'Fachgerechte Planung',
+  'Bewährte Markenkomponenten',
+  'Beratung für Berlin & Brandenburg',
+  'Datenblätter direkt abrufbar',
+];
+---
+
+<section class="product-hero" aria-labelledby="product-hero-title">
+  <div class="container product-hero__inner">
+    <div class="product-hero__content">
+      <p class="product-hero__eyebrow">Produktübersicht für Photovoltaik Berlin</p>
+      <h1 id="product-hero-title">Photovoltaik-Produkte & Komponenten für Ihre Solaranlage</h1>
+      <p class="product-hero__subheadline">
+        Hochwertige Solarmodule, Wechselrichter, Stromspeicher, Wallboxen und Montagesysteme - sorgfältig
+        ausgewählt für PV-Anlagen in Berlin und Brandenburg.
+      </p>
+      <p>
+        Cadani Solarinstallation plant und installiert Photovoltaikanlagen mit bewährten Komponenten führender
+        Hersteller. Auf dieser Seite finden Sie eine Übersicht ausgewählter Produkte und Datenblätter für
+        Solarmodule, Speicher, Wechselrichter, Wallboxen, Montagesysteme und Energiemanagement.
+      </p>
+      <div class="product-hero__actions" aria-label="Nächste Schritte">
+        <a class="button button--primary" href="/#kontakt">Kostenlose Beratung anfragen</a>
+        <a class="button button--secondary" href="/angebot_Solaranlage">Solaranlage konfigurieren</a>
+        <a class="button button--secondary" href="/check">PV-Check starten</a>
+      </div>
+    </div>
+    <ul class="product-hero__trust" aria-label="Vertrauensmerkmale">
+      {trustItems.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .product-hero {
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.96), rgb(245 247 250 / 0.86)),
+      radial-gradient(circle at 82% 18%, rgb(31 157 122 / 0.16), transparent 18rem),
+      linear-gradient(180deg, var(--color-white), var(--color-surface-muted));
+  }
+
+  .product-hero__inner {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+    padding-block: clamp(var(--space-3xl), 9vw, var(--space-4xl));
+  }
+
+  .product-hero__content {
+    display: grid;
+    gap: var(--space-lg);
+    max-width: 55rem;
+  }
+
+  .product-hero__eyebrow {
+    color: var(--color-success);
+    font-size: var(--font-size-sm);
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .product-hero h1 {
+    max-width: 15ch;
+    color: var(--color-blue-950);
+    font-size: clamp(2.25rem, 8vw, 4.65rem);
+  }
+
+  .product-hero__subheadline {
+    max-width: 50rem;
+    color: var(--color-blue-950);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+  }
+
+  .product-hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: stretch;
+  }
+
+  .product-hero__actions .button {
+    width: 100%;
+  }
+
+  .product-hero__trust {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .product-hero__trust li {
+    min-height: 5rem;
+    padding: var(--space-md);
+    border: 1px solid rgb(31 157 122 / 0.18);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-blue-950);
+    font-weight: 800;
+  }
+
+  .product-hero__trust li::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 0.25rem;
+    margin-block-end: var(--space-sm);
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+  }
+
+  @media (min-width: 48rem) {
+    .product-hero__actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .product-hero__actions .button {
+      width: fit-content;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .product-hero__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.46fr);
+      align-items: center;
+    }
+  }
+</style>
+

@@ -1,0 +1,128 @@
+---
+import type { NewsPost } from '@data/news';
+import { formatNewsDate } from '@data/news';
+
+interface Props {
+  post: NewsPost;
+}
+
+const { post } = Astro.props;
+const href = `/wissen/${post.slug}`;
+---
+
+<article class="news-card">
+  <a class="news-card__image-link" href={href} aria-label={`Beitrag lesen: ${post.title}`}>
+    <img
+      src={post.image}
+      alt={post.imageAlt}
+      width="640"
+      height="426"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+  <div class="news-card__body">
+    <div class="news-card__meta">
+      <span>{post.category}</span>
+      <time datetime={post.date}>{formatNewsDate(post.date)}</time>
+    </div>
+    <h3><a href={href}>{post.title}</a></h3>
+    <p>{post.description}</p>
+    <a class="news-card__link" href={href}>Beitrag lesen</a>
+  </div>
+</article>
+
+<style>
+  .news-card {
+    display: grid;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .news-card:hover {
+    border-color: rgb(31 157 122 / 0.28);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-0.125rem);
+  }
+
+  .news-card__image-link {
+    display: block;
+    overflow: hidden;
+    background: var(--color-surface-muted);
+  }
+
+  .news-card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: transform 200ms ease;
+  }
+
+  .news-card:hover img {
+    transform: scale(1.025);
+  }
+
+  .news-card__body {
+    display: grid;
+    gap: var(--space-sm);
+    align-content: start;
+    padding: var(--space-lg);
+  }
+
+  .news-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+    align-items: center;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  .news-card__meta span {
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-full);
+    background: rgb(31 157 122 / 0.09);
+    color: var(--color-success);
+    font-weight: 800;
+  }
+
+  .news-card h3 {
+    max-width: none;
+    color: var(--color-blue-950);
+  }
+
+  .news-card h3 a {
+    text-decoration: none;
+  }
+
+  .news-card h3 a:hover,
+  .news-card h3 a:focus-visible {
+    color: var(--color-success);
+  }
+
+  .news-card p {
+    font-size: var(--font-size-sm);
+  }
+
+  .news-card__link {
+    width: fit-content;
+    margin-block-start: var(--space-xs);
+    color: var(--color-primary);
+    font-weight: 800;
+    text-decoration-color: rgb(23 120 95 / 0.35);
+    text-underline-offset: 0.25em;
+  }
+
+  .news-card__link:hover,
+  .news-card__link:focus-visible {
+    color: var(--color-success);
+  }
+</style>

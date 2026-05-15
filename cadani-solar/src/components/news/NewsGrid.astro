@@ -1,0 +1,33 @@
+---
+import NewsCard from '@components/news/NewsCard.astro';
+import type { NewsPost } from '@data/news';
+
+interface Props {
+  posts: NewsPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="news-grid">
+  {posts.map((post) => <NewsCard post={post} />)}
+</div>
+
+<style>
+  .news-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .news-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .news-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

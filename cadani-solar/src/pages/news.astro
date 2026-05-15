@@ -1,0 +1,284 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import NewsCategoryFilter from '@components/news/NewsCategoryFilter.astro';
+import NewsCta from '@components/news/NewsCta.astro';
+import NewsGrid from '@components/news/NewsGrid.astro';
+import NewsHero from '@components/news/NewsHero.astro';
+import Button from '@components/ui/Button.astro';
+import { newsCategories, newsPosts } from '@data/news';
+import { site } from '@data/site';
+
+const title = 'News & Ratgeber zu Photovoltaik | Cadani Solar Berlin & Brandenburg';
+const description =
+  'Aktuelle News, Ratgeber und Tipps zu Photovoltaik, Solaranlagen, Batteriespeichern und Solarenergie von Cadani Solar fuer Berlin und Brandenburg.';
+const canonical = `${site.url}/news`;
+const heroImage = '/images/sections/solar-faq-background.jpg';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'News & Ratgeber zu Photovoltaik',
+  description,
+  url: canonical,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.url,
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: newsPosts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${site.url}/wissen/${post.slug}`,
+      name: post.title,
+      item: {
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        image: new URL(post.image, site.url).toString(),
+        url: `${site.url}/wissen/${post.slug}`,
+      },
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  image={heroImage}
+  ogTitle={title}
+  ogDescription={description}
+  type="website"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(collectionSchema)} />
+
+  <main id="main-content">
+    <NewsHero image={heroImage} />
+
+    <section class="news-intro section" aria-labelledby="news-intro-title">
+      <div class="container news-intro__inner">
+        <div class="news-intro__content">
+          <p class="eyebrow">Ratgeber fuer Hausbesitzer</p>
+          <h2 id="news-intro-title">Verstaendliche Solarberatung fuer die naechste Entscheidung</h2>
+          <p>
+            In unserem News- und Ratgeberbereich informieren wir regelmaessig ueber aktuelle Themen
+            rund um Photovoltaik, Batteriespeicher und Solarenergie. Hausbesitzerinnen und Hausbesitzer
+            aus Berlin und Brandenburg erhalten hier verstaendliche Antworten auf typische Fragen -
+            von der Planung ueber Foerdermoeglichkeiten bis zur Installation der eigenen PV-Anlage.
+          </p>
+          <p>
+            Der Fokus liegt auf Photovoltaik fuer Einfamilienhaeuser, Reihenhaeuser und
+            Doppelhaushaelften. Ob Photovoltaik Berlin, Solaranlage Berlin, Batteriespeicher,
+            Solarberatung Berlin oder PV-Anlage installieren: Die Beitraege ordnen wichtige Themen
+            praxisnah ein.
+          </p>
+        </div>
+        <aside class="news-intro__panel" aria-label="Themenschwerpunkte">
+          <strong>Schwerpunkte</strong>
+          <ul>
+            <li>Planung und Installation von PV-Anlagen</li>
+            <li>Batteriespeicher und Eigenverbrauch</li>
+            <li>Solarenergie in Berlin und Brandenburg</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="news-overview section" aria-labelledby="news-overview-title">
+      <div class="container news-overview__inner">
+        <div class="news-overview__header">
+          <div>
+            <p class="eyebrow">Aktuelle Beitraege</p>
+            <h2 id="news-overview-title">News, Tipps und Ratgeber von Cadani Solar</h2>
+          </div>
+          <p>
+            Kompakte Informationen fuer die Planung, Auswahl und Nutzung moderner Solartechnik im
+            eigenen Zuhause.
+          </p>
+        </div>
+
+        <NewsCategoryFilter categories={newsCategories} />
+        <NewsGrid posts={newsPosts} />
+      </div>
+    </section>
+
+    <NewsCta />
+
+    <section class="news-faq section" aria-labelledby="news-faq-title">
+      <div class="container news-faq__inner">
+        <div class="news-faq__header">
+          <p class="eyebrow">Haeufige Fragen</p>
+          <h2 id="news-faq-title">Kurz beantwortet</h2>
+        </div>
+        <div class="news-faq__list">
+          <article>
+            <h3>Welche Themen behandelt der Cadani Solar Ratgeber?</h3>
+            <p>
+              Der Ratgeber behandelt Photovoltaik, Solaranlagen, Batteriespeicher, Wallboxen,
+              Eigenverbrauch und die Planung von PV-Anlagen fuer Wohnhaeuser. Passende Produkte finden
+              Sie unter <a href="/produkte">Produkte</a>.
+            </p>
+          </article>
+          <article>
+            <h3>Lohnt sich Photovoltaik in Berlin und Brandenburg?</h3>
+            <p>
+              Ja, viele Daecher in Berlin und Brandenburg eignen sich fuer eine Solaranlage. Entscheidend
+              sind Dachflaeche, Ausrichtung, Verschattung und Verbrauch. Eine erste Einschaetzung ist
+              ueber den <a href="/angebot_Solaranlage">Solaranlagen-Konfigurator</a> moeglich.
+            </p>
+          </article>
+          <article>
+            <h3>Kann ich direkt eine Beratung anfragen?</h3>
+            <p>
+              Ja. Ueber den kurzen <a href="/check">Solar-Check</a> koennen Sie eine kostenlose Beratung
+              starten und die wichtigsten Eckdaten zu Ihrem Haus uebermitteln.
+            </p>
+          </article>
+        </div>
+        <div class="news-faq__actions">
+          <Button href="/check" label="Kostenlose Beratung anfragen" />
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .news-intro {
+    background: var(--color-white);
+  }
+
+  .news-intro__inner {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+    align-items: start;
+  }
+
+  .news-intro__content {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .news-intro__content h2,
+  .news-overview h2,
+  .news-faq h2 {
+    color: var(--color-blue-950);
+  }
+
+  .news-intro__panel {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-inline-start: 0.375rem solid var(--color-success);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-muted);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .news-intro__panel strong {
+    color: var(--color-blue-950);
+    font-size: var(--font-size-md);
+  }
+
+  .news-intro__panel ul {
+    display: grid;
+    gap: var(--space-xs);
+    padding-inline-start: 1.2rem;
+    margin: 0;
+  }
+
+  .news-overview {
+    background: var(--color-surface-muted);
+  }
+
+  .news-overview__inner {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-2xl));
+  }
+
+  .news-overview__header {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .news-overview__header > div {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .news-faq {
+    background: var(--color-white);
+  }
+
+  .news-faq__inner {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .news-faq__header {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .news-faq__list {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .news-faq article {
+    display: grid;
+    gap: var(--space-sm);
+    padding-block-end: var(--space-md);
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .news-faq h3 {
+    max-width: none;
+    color: var(--color-blue-950);
+  }
+
+  .news-faq a {
+    color: var(--color-primary);
+    font-weight: 800;
+    text-underline-offset: 0.2em;
+  }
+
+  .news-faq a:hover,
+  .news-faq a:focus-visible {
+    color: var(--color-success);
+  }
+
+  .news-faq__actions {
+    display: flex;
+  }
+
+  @media (min-width: 56rem) {
+    .news-intro__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+    }
+
+    .news-overview__header {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 28rem);
+      align-items: end;
+    }
+
+    .news-faq__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .news-faq article {
+      padding-inline-end: var(--space-md);
+      border-block-end: 0;
+      border-inline-end: 1px solid var(--color-border);
+    }
+
+    .news-faq article:last-child {
+      border-inline-end: 0;
+    }
+  }
+</style>

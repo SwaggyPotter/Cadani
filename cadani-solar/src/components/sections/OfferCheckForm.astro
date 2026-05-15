@@ -1,0 +1,180 @@
+---
+const interests = ['Solaranlage', 'Speicher', 'Wallbox', 'Installation', 'Service', 'Angebotsprüfung'];
+---
+
+<form
+  class="offer-check-form"
+  method="post"
+  action=""
+  enctype="multipart/form-data"
+  aria-label="Solarangebot zur Prüfung hochladen"
+>
+  <!-- TODO: Backend-Endpunkt fuer Upload und Kontaktanfrage anbinden. -->
+  <div class="offer-check-form__grid">
+    <label>
+      Vorname
+      <input type="text" name="first_name" autocomplete="given-name" />
+    </label>
+    <label>
+      Nachname
+      <input type="text" name="last_name" autocomplete="family-name" />
+    </label>
+    <label class="offer-check-form__wide">
+      Straße und Hausnummer
+      <input type="text" name="street" autocomplete="street-address" />
+    </label>
+    <label>
+      Postleitzahl
+      <input type="text" name="postal_code" autocomplete="postal-code" inputmode="numeric" />
+    </label>
+    <label>
+      E-Mail *
+      <input type="email" name="email" autocomplete="email" required />
+    </label>
+    <label>
+      Telefon
+      <input type="tel" name="phone" autocomplete="tel" />
+    </label>
+  </div>
+
+  <fieldset class="offer-check-form__fieldset">
+    <legend>Interesse an:</legend>
+    <div class="offer-check-form__options">
+      {
+        interests.map((interest) => (
+          <label>
+            <input type="checkbox" name="interests" value={interest} />
+            <span>{interest}</span>
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <label class="offer-check-form__file">
+    Angebot hochladen
+    <span>PDF, JPG oder PNG möglich</span>
+    <input type="file" name="offer_file" accept=".pdf,.jpg,.jpeg,.png" />
+  </label>
+
+  <label>
+    Nachricht
+    <textarea name="message" rows="5"></textarea>
+  </label>
+
+  <label class="offer-check-form__privacy">
+    <input type="checkbox" name="privacy" required />
+    <span>
+      Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung
+      meiner Angaben zur Kontaktaufnahme einverstanden.
+    </span>
+  </label>
+
+  <button class="button button--primary" type="submit">Anfrage absenden</button>
+</form>
+
+<style>
+  .offer-check-form {
+    display: grid;
+    gap: var(--space-lg);
+    padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .offer-check-form__grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .offer-check-form label,
+  .offer-check-form__fieldset {
+    display: grid;
+    gap: var(--space-xs);
+    color: var(--color-text);
+    font-weight: 750;
+  }
+
+  .offer-check-form__fieldset {
+    padding: 0;
+    border: 0;
+    margin: 0;
+  }
+
+  .offer-check-form__fieldset legend {
+    margin-block-end: var(--space-sm);
+    color: var(--color-blue-950);
+    font-weight: 800;
+  }
+
+  .offer-check-form input,
+  .offer-check-form textarea {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    background: var(--color-white);
+    color: var(--color-text);
+  }
+
+  .offer-check-form input:focus,
+  .offer-check-form textarea:focus {
+    border-color: rgb(31 157 122 / 0.55);
+    outline: 3px solid rgb(247 201 72 / 0.32);
+    outline-offset: 0;
+  }
+
+  .offer-check-form textarea {
+    resize: vertical;
+  }
+
+  .offer-check-form__options {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .offer-check-form__options label,
+  .offer-check-form__privacy {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    font-weight: 550;
+  }
+
+  .offer-check-form__options input,
+  .offer-check-form__privacy input {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-block-start: 0.25rem;
+  }
+
+  .offer-check-form__file {
+    padding: var(--space-lg);
+    border: 1px dashed rgb(31 157 122 / 0.45);
+    border-radius: var(--radius-md);
+    background: rgb(31 157 122 / 0.06);
+  }
+
+  .offer-check-form__file span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 550;
+  }
+
+  .offer-check-form__privacy a {
+    color: var(--color-primary);
+    font-weight: 800;
+  }
+
+  @media (min-width: 48rem) {
+    .offer-check-form__grid,
+    .offer-check-form__options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .offer-check-form__wide {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

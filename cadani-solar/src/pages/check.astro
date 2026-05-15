@@ -1,0 +1,587 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/ui/Button.astro';
+import CheckHero from '@components/sections/CheckHero.astro';
+import CheckListGrid from '@components/sections/CheckListGrid.astro';
+import FaqSection from '@components/sections/FaqSection.astro';
+import OfferCheckForm from '@components/sections/OfferCheckForm.astro';
+import ProcessSteps from '@components/sections/ProcessSteps.astro';
+import FAQSchema from '@components/seo/FAQSchema.astro';
+
+const title = 'Solarangebot prüfen lassen | Solar-Check Berlin & Brandenburg | Cadani Solar';
+const description =
+  'Lassen Sie Ihr Solarangebot von Cadani Solar fachlich prüfen. Wir analysieren Preisstruktur, Komponenten, Speichergröße und technische Auslegung für Photovoltaik-Angebote in Berlin und Brandenburg.';
+const whatsappHref =
+  'https://wa.me/4915206341767?text=Hallo%20Cadani%20Solar%2C%20ich%20m%C3%B6chte%20mein%20Solarangebot%20pr%C3%BCfen%20lassen.';
+
+const heroBadges = [
+  { label: 'Fachliche Einschätzung' },
+  { label: 'Keine Verpflichtung' },
+  { label: 'Rückmeldung innerhalb von 48h' },
+];
+
+const reviewAreas = [
+  {
+    title: 'Preisstruktur',
+    text: 'Wir prüfen, ob die angebotenen Kosten nachvollziehbar und marktgerecht wirken.',
+  },
+  {
+    title: 'Komponenten',
+    text: 'Bewertung von Modulen, Wechselrichter, Speicher, Wallbox und Zubehör.',
+  },
+  {
+    title: 'Speichergröße',
+    text: 'Einschätzung, ob der Speicher zur Anlagengröße und zu Ihrem Verbrauch passt.',
+  },
+  {
+    title: 'Technische Auslegung',
+    text: 'Prüfung von Dachausrichtung, Wechselrichterdimensionierung und Verschaltung.',
+  },
+  {
+    title: 'Montageumfang',
+    text: 'Kontrolle, ob Gerüst, Unterkonstruktion, Elektroarbeiten und Anmeldung berücksichtigt sind.',
+  },
+  {
+    title: 'Wirtschaftlichkeit',
+    text: 'Fachliche Einschätzung zu Eigenverbrauch, Einspeisung, Amortisation und Plausibilität.',
+  },
+];
+
+const processSteps = [
+  {
+    title: 'Angebot hochladen',
+    text: 'Sie senden uns Ihr bestehendes Photovoltaik-Angebot.',
+  },
+  {
+    title: 'Fachliche Analyse',
+    text: 'Wir prüfen Komponenten, technische Auslegung, Speichergröße und Preisstruktur.',
+  },
+  {
+    title: 'Rückmeldung erhalten',
+    text: 'Sie erhalten eine persönliche Einschätzung - transparent und ohne Verkaufsdruck.',
+  },
+];
+
+const trustItems = [
+  'Keine Weitergabe Ihrer Daten an Dritte',
+  'Kein Verkauf Ihrer Kontaktdaten',
+  'Kein Verkaufsdruck',
+  'Keine Verpflichtung',
+  'Keine rechtlich verbindliche Beratung, sondern eine fachliche Einschätzung',
+];
+
+const commonErrors = [
+  'Speicher größer als wirtschaftlich sinnvoll',
+  'Wechselrichter nicht optimal zur Dachausrichtung passend',
+  'Unklare oder fehlende Angaben zur Unterkonstruktion',
+  'Fehlende Angaben zu Gerüst, Netzanschluss oder Zählerschrank',
+  'Unrealistische Eigenverbrauchs- oder Einspeiseannahmen',
+  'Unvollständige Auflistung von Montage- und Elektroarbeiten',
+];
+
+const checklistItems = [
+  'Gerüst',
+  'Netzanschluss',
+  'Anmeldung beim Netzbetreiber',
+  'Zählerschrank-Anpassung',
+  'Überspannungsschutz',
+  'Potentialausgleich',
+  'Unterkonstruktion',
+  'Wechselrichterauslegung',
+  'Speicherdimensionierung',
+  'Inbetriebnahme und Dokumentation',
+];
+
+const faqs = [
+  {
+    question: 'Warum sollte ich mein Solarangebot prüfen lassen?',
+    answer:
+      'Viele Angebote sehen ähnlich aus, unterscheiden sich aber deutlich bei Komponenten, Speichergröße, Montageumfang und Preisstruktur. Eine fachliche Zweitmeinung hilft, Risiken und offene Punkte besser zu erkennen.',
+  },
+  {
+    question: 'Welche Unterlagen sollte ich hochladen?',
+    answer:
+      'Am hilfreichsten sind das vollständige Solarangebot, technische Datenblätter, Angaben zum Dach, Verbrauchsdaten und vorhandene Fotos oder Pläne. Auch ein unvollständiges PV-Angebot Berlin können wir zunächst grob einordnen.',
+  },
+  {
+    question: 'Prüft Cadani Solar auch Angebote anderer Anbieter?',
+    answer:
+      'Ja. Cadani Solar prüft auch Angebote anderer Anbieter fachlich und vertraulich. Die Angebotsprüfung ist als transparente Einschätzung gedacht, nicht als Druckvertrieb.',
+  },
+  {
+    question: 'Bekomme ich eine rechtlich verbindliche Beratung?',
+    answer:
+      'Nein. Der Solar-Check ersetzt keine rechtliche Beratung. Sie erhalten eine fachliche Einschätzung auf Basis der eingereichten Unterlagen.',
+  },
+  {
+    question: 'Wie schnell bekomme ich eine Rückmeldung?',
+    answer:
+      'In der Regel melden wir uns innerhalb von 48 Stunden persönlich zurück. Bei komplexen Unterlagen kann die vollständige Einschätzung etwas mehr Zeit benötigen.',
+  },
+  {
+    question: 'Kostet der Solar-Check etwas?',
+    answer:
+      'Wenn Kosten entstehen sollten, klären wir das transparent vorab. Senden Sie uns zunächst Ihr Angebot, damit wir Umfang und Fragestellung einschätzen können.',
+  },
+  {
+    question: 'Werden meine Daten weitergegeben?',
+    answer:
+      'Nein. Wir geben Ihre Daten nicht an Dritte weiter und verkaufen keine Kontaktdaten. Ihre Dokumente behandeln wir vertraulich.',
+  },
+  {
+    question: 'Für welche Regionen ist der Solar-Check gedacht?',
+    answer:
+      'Der Solar-Check richtet sich vor allem an Kunden in Berlin, Brandenburg und Umgebung, die ein Solarangebot Brandenburg, eine Solaranlage Berlin oder eine PV-Anlage Angebot prüfen lassen möchten.',
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Solarangebot prüfen lassen',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Cadani Solarinstallation GmbH',
+  },
+  areaServed: ['Berlin', 'Brandenburg'],
+  serviceType: 'Photovoltaik-Angebotsprüfung / Solarberatung',
+  description,
+  url: new URL('/check', Astro.site ?? 'https://www.cadani-solar.de').toString(),
+};
+---
+
+<BaseLayout title={title} description={description} image="/images/sections/solar-check-hero.png">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <FAQSchema items={faqs} />
+
+  <main id="main-content" class="check-page">
+    <CheckHero
+      title="Solarangebot prüfen lassen - fair, transparent und fachlich bewertet"
+      subtitle="Sie haben bereits ein Angebot für eine Photovoltaikanlage erhalten? Cadani Solar prüft für Sie Preisstruktur, Komponenten, Speichergröße und technische Plausibilität."
+      primaryHref="#angebot-hochladen"
+      secondaryHref={whatsappHref}
+      badges={heroBadges}
+    />
+
+    <section class="section check-intro" aria-labelledby="intro-heading">
+      <div class="container check-split">
+        <div class="stack">
+          <p class="eyebrow">Fair und sicher zur passenden Solaranlage</p>
+          <h2 id="intro-heading">Warum ein Solarangebot prüfen lassen?</h2>
+        </div>
+        <div class="check-text">
+          <p>
+            Viele Photovoltaik-Angebote wirken auf den ersten Blick ähnlich. In der Praxis
+            unterscheiden sie sich jedoch deutlich bei Komponentenqualität, Speichergröße,
+            Wechselrichterauslegung, Montageumfang, Netzanschluss, Zählerschrank und langfristiger
+            Wirtschaftlichkeit.
+          </p>
+          <p>
+            Genau hier setzt der Cadani Solar-Check an. Wir helfen Ihnen dabei, ein Photovoltaik
+            Angebot prüfen zu lassen und technische sowie wirtschaftliche Punkte verständlich
+            einzuordnen - besonders für Solaranlage Berlin, Photovoltaik Berlin und Anlagen im
+            Berliner Umland.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section check-review" aria-labelledby="review-heading">
+      <div class="container stack">
+        <div class="check-section-header">
+          <p class="eyebrow">Technische und wirtschaftliche Analyse</p>
+          <h2 id="review-heading">Was wir bei Ihrem Angebot prüfen</h2>
+          <p>
+            Beim Solar-Check Berlin geht es nicht um pauschale Kritik, sondern um eine nachvollziehbare
+            Einschätzung der wichtigsten Angebotsbestandteile.
+          </p>
+        </div>
+        <div class="check-card-grid">
+          {
+            reviewAreas.map((area) => (
+              <article class="check-card">
+                <h3>{area.title}</h3>
+                <p>{area.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="angebot-hochladen" class="section check-upload" aria-labelledby="upload-heading">
+      <div class="container check-upload__grid">
+        <div class="check-upload__content">
+          <p class="eyebrow">Angebot hochladen</p>
+          <h2 id="upload-heading">Laden Sie Ihr Angebot hoch</h2>
+          <p>
+            Senden Sie uns Ihr bestehendes Solarangebot. Wir analysieren es fachlich auf
+            Preisstruktur, technische Auslegung und wirtschaftliche Plausibilität.
+          </p>
+          <div class="check-contact-box" aria-label="Direkter Kontakt">
+            <p><strong>Nico Kurzweil</strong> - <a href="tel:+4915206341767">0152 06 34 17 67</a></p>
+            <p><a href="mailto:info@cadani-solar.de">info@cadani-solar.de</a></p>
+            <p>
+              Wir geben Ihre Daten nicht an Dritte weiter. Ihre Anfrage ist unverbindlich und wird
+              persönlich bearbeitet.
+            </p>
+          </div>
+        </div>
+        <OfferCheckForm />
+      </div>
+    </section>
+
+    <section id="ablauf" class="section check-process" aria-labelledby="process-heading">
+      <div class="container stack">
+        <div class="check-section-header">
+          <p class="eyebrow">Ablauf</p>
+          <h2 id="process-heading">So funktioniert der Solar-Check</h2>
+        </div>
+        <ProcessSteps steps={processSteps} />
+      </div>
+    </section>
+
+    <section class="section check-trust" aria-labelledby="trust-heading">
+      <div class="container stack">
+        <div class="check-section-header">
+          <p class="eyebrow">Vertraulich und transparent</p>
+          <h2 id="trust-heading">Was wir nicht machen</h2>
+          <p>
+            Unsere Prüfung ersetzt keine rechtliche Beratung. Sie erhalten eine fachliche Einschätzung
+            auf Basis der von Ihnen eingereichten Unterlagen. Ihre Daten und Dokumente behandeln wir
+            vertraulich.
+          </p>
+        </div>
+        <div class="check-card-grid check-card-grid--compact">
+          {
+            trustItems.map((item) => (
+              <article class="check-card check-card--icon">
+                <span aria-hidden="true">✓</span>
+                <h3>{item}</h3>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section check-errors" aria-labelledby="errors-heading">
+      <div class="container check-split">
+        <div class="stack">
+          <p class="eyebrow">Häufige Angebotsfehler</p>
+          <h2 id="errors-heading">Fehler, die wir in Solarangeboten häufig sehen</h2>
+        </div>
+        <ul class="check-error-list">
+          {commonErrors.map((error) => <li>{error}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section id="checkliste" class="section check-checklist" aria-labelledby="checklist-heading">
+      <div class="container stack">
+        <div class="check-section-header">
+          <p class="eyebrow">Angebotscheck</p>
+          <h2 id="checklist-heading">Enthält Ihr Angebot diese wichtigen Punkte?</h2>
+          <p>
+            Wenn Sie eine Solaranlage Angebot prüfen lassen, sollten diese Positionen nachvollziehbar
+            aufgeführt oder zumindest eindeutig beschrieben sein.
+          </p>
+        </div>
+        <CheckListGrid items={checklistItems} />
+      </div>
+    </section>
+
+    <section class="section check-local" aria-labelledby="local-heading">
+      <div class="container check-split">
+        <div class="stack">
+          <p class="eyebrow">Berlin & Brandenburg</p>
+          <h2 id="local-heading">Solarangebot prüfen lassen in Berlin und Brandenburg</h2>
+        </div>
+        <div class="check-text">
+          <p>
+            Cadani Solar unterstützt Kunden in Berlin, Brandenburg und Umgebung bei der Einschätzung
+            von Photovoltaik-Angeboten. Besonders bei Solaranlagen in Berlin und PV-Anlagen im Berliner
+            Umland lohnt sich eine zweite fachliche Meinung, da Dachform, Netzanschluss, Zählerschrank
+            und Speichergröße stark variieren können.
+          </p>
+          <div class="check-link-list" aria-label="Weitere Informationen">
+            <a href="/angebot-solaranlage">Solaranlage anfragen</a>
+            <a href="/strom-gas">Strom & Gas Beratung</a>
+            <a href="/kontakt/">Kontakt aufnehmen</a>
+            <a href="/faq/">Häufige Fragen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="faq">
+      <FaqSection title="Häufige Fragen zum Solar-Check" items={faqs} />
+    </div>
+
+    <section class="section check-final-cta" aria-labelledby="final-cta-heading">
+      <div class="container check-final-cta__inner">
+        <div class="stack">
+          <p class="eyebrow">Zweite Meinung einholen</p>
+          <h2 id="final-cta-heading">Sie möchten sicher sein, dass Ihr Solarangebot passt?</h2>
+          <p>
+            Laden Sie Ihr Angebot hoch oder kontaktieren Sie Cadani Solar direkt per WhatsApp. Wir
+            prüfen Ihr Angebot transparent, verständlich und fachlich.
+          </p>
+        </div>
+        <div class="check-final-cta__actions">
+          <Button href="#angebot-hochladen" label="Jetzt Angebot prüfen lassen" />
+          <Button href={whatsappHref} label="WhatsApp Kontakt" variant="secondary" />
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .check-page {
+    background: var(--color-white);
+  }
+
+  .check-split,
+  .check-upload__grid {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+  }
+
+  .check-text,
+  .check-upload__content {
+    display: grid;
+    gap: var(--space-md);
+    align-content: start;
+  }
+
+  .check-section-header {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 54rem;
+  }
+
+  .check-section-header h2,
+  .check-split h2,
+  .check-upload h2,
+  .check-final-cta h2 {
+    max-width: 20ch;
+    color: var(--color-blue-950);
+  }
+
+  .check-review,
+  .check-trust,
+  .check-local {
+    background: var(--color-surface-muted);
+  }
+
+  .check-card-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .check-card {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .check-card h3 {
+    color: var(--color-blue-950);
+  }
+
+  .check-card--icon {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .check-card--icon span {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgb(31 157 122 / 0.1);
+    color: var(--color-success);
+    font-weight: 800;
+  }
+
+  .check-card--icon h3 {
+    font-size: var(--font-size-md);
+  }
+
+  .check-upload {
+    background: var(--color-blue-950);
+    color: var(--color-text-inverse);
+  }
+
+  .check-upload h2,
+  .check-upload p {
+    color: inherit;
+  }
+
+  .check-upload .eyebrow {
+    color: var(--color-yellow-400);
+  }
+
+  .check-contact-box {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: var(--radius-sm);
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  .check-contact-box p {
+    max-width: none;
+  }
+
+  .check-contact-box a {
+    color: var(--color-text-inverse);
+    font-weight: 800;
+    text-decoration-color: rgb(255 255 255 / 0.45);
+    text-underline-offset: 0.25em;
+  }
+
+  :global(.check-process .process-steps) {
+    display: grid;
+    gap: var(--space-md);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  :global(.check-process .process-steps__item) {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  :global(.check-process .process-steps__number) {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--color-success);
+    color: var(--color-text-inverse);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  :global(.check-process .process-steps h3) {
+    color: var(--color-blue-950);
+  }
+
+  .check-error-list {
+    display: grid;
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .check-error-list li {
+    padding: var(--space-md);
+    border-inline-start: 0.25rem solid var(--color-success);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-muted);
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .check-link-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .check-link-list a {
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-white);
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .check-final-cta {
+    background: var(--color-blue-950);
+    color: var(--color-text-inverse);
+  }
+
+  .check-final-cta__inner {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .check-final-cta h2,
+  .check-final-cta p {
+    color: inherit;
+  }
+
+  .check-final-cta .eyebrow {
+    color: var(--color-yellow-400);
+  }
+
+  .check-final-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .check-final-cta__actions :global(.button--secondary) {
+    border-color: rgb(255 255 255 / 0.22);
+    background: rgb(255 255 255 / 0.08);
+    color: var(--color-text-inverse);
+  }
+
+  @media (min-width: 48rem) {
+    .check-card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    :global(.check-process .process-steps) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .check-split {
+      grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+      align-items: start;
+    }
+
+    .check-upload__grid {
+      grid-template-columns: minmax(0, 0.85fr) minmax(28rem, 1.15fr);
+      align-items: start;
+    }
+
+    .check-card-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .check-card-grid--compact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .check-final-cta__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+</style>

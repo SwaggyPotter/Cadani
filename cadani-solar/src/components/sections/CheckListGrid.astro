@@ -1,0 +1,67 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="check-list-grid">
+  {
+    items.map((item) => (
+      <li>
+        <span aria-hidden="true">✓</span>
+        {item}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .check-list-grid {
+    display: grid;
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .check-list-grid li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-sm);
+    align-items: center;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+    font-weight: 750;
+  }
+
+  .check-list-grid span {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgb(31 157 122 / 0.1);
+    color: var(--color-success);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  @media (min-width: 48rem) {
+    .check-list-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .check-list-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

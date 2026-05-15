@@ -1,0 +1,71 @@
+---
+import Button from '@components/ui/Button.astro';
+---
+
+<section class="news-cta" aria-labelledby="news-cta-title">
+  <div class="container news-cta__inner">
+    <div class="news-cta__content">
+      <p class="news-cta__kicker">Solarwissen vor Ort</p>
+      <h2 id="news-cta-title">Photovoltaik-Wissen fuer Berlin und Brandenburg</h2>
+      <p>
+        Ob Solaranlage auf dem Einfamilienhaus, Batteriespeicher zur Erhoehung des Eigenverbrauchs
+        oder Planung einer PV-Anlage in Berlin und Brandenburg - im Cadani Solar Ratgeber finden Sie
+        verstaendliche Informationen fuer Ihre Entscheidung.
+      </p>
+    </div>
+    <div class="news-cta__actions">
+      <Button href="/check" label="Kostenlose Solarberatung starten" />
+      <Button href="/produkte" label="Produkte entdecken" variant="secondary" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .news-cta {
+    background: var(--color-blue-950);
+    color: var(--color-text-inverse);
+  }
+
+  .news-cta__inner {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+    padding-block: clamp(var(--space-2xl), 7vw, var(--space-4xl));
+  }
+
+  .news-cta__content {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .news-cta__kicker {
+    color: var(--color-yellow-400);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+  }
+
+  .news-cta h2 {
+    max-width: 16ch;
+    color: var(--color-text-inverse);
+  }
+
+  .news-cta p {
+    color: rgb(255 255 255 / 0.82);
+  }
+
+  .news-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  @media (min-width: 56rem) {
+    .news-cta__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .news-cta__actions {
+      justify-content: end;
+    }
+  }
+</style>

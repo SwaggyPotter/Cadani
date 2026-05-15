@@ -1,0 +1,104 @@
+---
+import Button from '@components/ui/Button.astro';
+
+interface Props {
+  image: string;
+}
+
+const { image } = Astro.props;
+---
+
+<section class="news-hero" aria-labelledby="news-hero-title">
+  <div class="container news-hero__inner">
+    <div class="news-hero__content">
+      <p class="news-hero__kicker">News &amp; Ratgeber</p>
+      <h1 id="news-hero-title">News rund um Photovoltaik, Solarstrom und Cadani Solar</h1>
+      <p class="news-hero__text">
+        Aktuelle Beitraege, praktische Tipps und verstaendliche Informationen rund um Solaranlagen,
+        Batteriespeicher, Eigenverbrauch und Solarenergie in Berlin und Brandenburg.
+      </p>
+      <div class="news-hero__actions" aria-label="Schnelleinstiege">
+        <Button href="/check" label="Kostenlose Beratung anfragen" />
+        <Button href="/angebot_Solaranlage" label="Solaranlage konfigurieren" variant="secondary" />
+      </div>
+    </div>
+    <figure class="news-hero__media">
+      <img
+        src={image}
+        alt="Photovoltaikanlage auf einem Wohnhausdach in Berlin und Brandenburg"
+        width="960"
+        height="640"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .news-hero {
+    overflow: hidden;
+    border-block-end: 1px solid var(--color-border);
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.98), rgb(245 247 250 / 0.9)),
+      linear-gradient(180deg, var(--color-white), var(--color-surface-muted));
+  }
+
+  .news-hero__inner {
+    display: grid;
+    gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
+    align-items: center;
+    padding-block: clamp(var(--space-2xl), 8vw, var(--space-4xl));
+  }
+
+  .news-hero__content {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .news-hero__kicker {
+    width: fit-content;
+    padding: var(--space-2xs) var(--space-sm);
+    border: 1px solid rgb(31 157 122 / 0.22);
+    border-radius: var(--radius-full);
+    background: rgb(31 157 122 / 0.08);
+    color: var(--color-success);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+  }
+
+  .news-hero h1 {
+    max-width: 15ch;
+    color: var(--color-blue-950);
+  }
+
+  .news-hero__text {
+    font-size: var(--font-size-md);
+  }
+
+  .news-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .news-hero__media {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .news-hero__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (min-width: 56rem) {
+    .news-hero__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.82fr);
+    }
+  }
+</style>

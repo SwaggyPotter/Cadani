@@ -1,0 +1,133 @@
+﻿---
+import type { Product } from '@data/products';
+
+interface Props {
+  product: Product;
+  categoryLabel: string;
+}
+
+const { product, categoryLabel } = Astro.props;
+---
+
+<article class="product-card">
+  <div class="product-card__top">
+    <span class="product-card__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M5 4h14l2 8H3L5 4Z"></path>
+        <path d="M3 12h18v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6Z"></path>
+        <path d="M8 4 7 12"></path>
+        <path d="M16 4l1 8"></path>
+        <path d="M4 16h16"></path>
+      </svg>
+    </span>
+    <span class="product-card__badge">{categoryLabel}</span>
+  </div>
+  <div class="product-card__body">
+    <h3>{product.name}</h3>
+    <p>{product.description}</p>
+  </div>
+  <a class="product-card__link" href={product.datasheetUrl} target="_blank" rel="noopener noreferrer">
+    Datenblatt öffnen
+    <span aria-hidden="true">â†—</span>
+  </a>
+</article>
+
+<style>
+  .product-card {
+    display: flex;
+    min-width: 0;
+    min-height: 16rem;
+    flex-direction: column;
+    gap: var(--space-lg);
+    justify-content: space-between;
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .product-card:hover {
+    border-color: rgb(31 157 122 / 0.32);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-0.125rem);
+  }
+
+  .product-card__top {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-card__icon {
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(31 157 122 / 0.18);
+    border-radius: var(--radius-md);
+    background: rgb(31 157 122 / 0.08);
+    color: var(--color-success);
+  }
+
+  .product-card__icon svg {
+    width: 1.55rem;
+    height: 1.55rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  .product-card__badge {
+    min-width: 0;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-full);
+    background: rgb(247 201 72 / 0.2);
+    color: var(--color-blue-950);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: end;
+  }
+
+  .product-card__body {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .product-card h3 {
+    max-width: none;
+    color: var(--color-blue-950);
+    font-size: var(--font-size-lg);
+  }
+
+  .product-card p {
+    color: var(--color-text-muted);
+  }
+
+  .product-card__link {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-success);
+    font-weight: 800;
+    text-decoration-color: rgb(23 120 95 / 0.32);
+    text-underline-offset: 0.25em;
+  }
+
+  .product-card__link:hover,
+  .product-card__link:focus-visible {
+    color: var(--color-blue-950);
+  }
+</style>
+
