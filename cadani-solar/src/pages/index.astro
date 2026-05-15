@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import CompanyIntroSection from '@components/sections/CompanyIntroSection.astro';
+import FamilyBusinessSection from '@components/sections/FamilyBusinessSection.astro';
+import FundingSection from '@components/sections/FundingSection.astro';
 import HeroSection from '@components/sections/HeroSection.astro';
 import PartnerLogos from '@components/sections/PartnerLogos.astro';
+import ServiceBenefitsSection from '@components/sections/ServiceBenefitsSection.astro';
 import SeoContentPlaceholder from '@components/sections/SeoContentPlaceholder.astro';
 
 const title = 'Startseite | Cadani Solar';
@@ -12,6 +16,10 @@ const description = 'Meta Description Platzhalter fuer die Startseite von Cadani
   <main id="main-content">
     <HeroSection />
     <PartnerLogos />
+    <CompanyIntroSection />
+    <ServiceBenefitsSection />
+    <FamilyBusinessSection />
+    <FundingSection />
     <SeoContentPlaceholder />
   </main>
 </BaseLayout>

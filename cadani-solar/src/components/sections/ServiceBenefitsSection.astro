@@ -1,0 +1,65 @@
+---
+import { serviceBenefits, type ServiceBenefitIcon } from '@data/serviceBenefits';
+
+const ctaHref = '/#kontakt';
+
+const iconPaths: Record<ServiceBenefitIcon, string[]> = {
+  thumb: [
+    'M14 28h-6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h6V28Z',
+    'M14 30 25 10c1.2-2.2 4.5-1.4 4.5 1.1v11.4H45a5 5 0 0 1 4.8 6.4l-4.4 15A8 8 0 0 1 37.7 50H14V30Z',
+  ],
+  cost: [
+    'M42 18a14 14 0 1 0 0 28',
+    'M45 22a16 16 0 1 1 0 20',
+    'M38 25H24',
+    'M36 32H22',
+    'M24 25c3.2-7.4 11.4-9.8 18-4.8',
+    'M24 39c3.2 7.4 11.4 9.8 18 4.8',
+  ],
+  experience: [
+    'M32 8a24 24 0 1 0 0 48 24 24 0 0 0 0-48Z',
+    'M32 18v15l10 6',
+    'M19 15l-5-5',
+    'M45 15l5-5',
+  ],
+  speed: [
+    'M34 6c-9 3.2-16.4 10.6-19.5 19.8L8 32l8.6 3.4L20 44l6.2-6.5C35.4 34.4 42.8 27 46 18l4-12-16 0Z',
+    'M25 39 16 48',
+    'M18 34 9 43',
+    'M39 25a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
+  ],
+};
+---
+
+<section class="service-benefits" aria-labelledby="service-benefits-heading">
+  <!-- TODO: Bild später lokal in public/images/backgrounds speichern und als WebP/AVIF optimieren -->
+  <div class="service-benefits__overlay" aria-hidden="true"></div>
+
+  <div class="container service-benefits__inner">
+    <h2 class="service-benefits__title" id="service-benefits-heading">Bester Service für Sie</h2>
+
+    <ul class="service-benefits__grid">
+      {
+        serviceBenefits.map((benefit) => (
+          <li>
+            <article class="service-benefits__card">
+              <span class="service-benefits__icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" focusable="false">
+                  {iconPaths[benefit.icon].map((path) => (
+                    <path d={path} />
+                  ))}
+                </svg>
+              </span>
+              <h3 class="service-benefits__card-title">{benefit.title}</h3>
+              <p class="service-benefits__text">{benefit.text}</p>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="service-benefits__actions">
+      <a class="button button--primary service-benefits__cta" href={ctaHref}>Jetzt unverbindlich anfragen</a>
+    </div>
+  </div>
+</section>

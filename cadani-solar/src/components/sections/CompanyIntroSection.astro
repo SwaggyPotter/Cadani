@@ -1,0 +1,60 @@
+---
+const videoSrc = 'https://cdn1.site-media.eu/images/0/9266440/Cadani_film.mp4';
+const posterSrc =
+  'https://cdn1.site-media.eu/images/1920/9266547/Bildschirmfoto_14-6-2024_141516_app.vyond.com.jpeg';
+---
+
+<section class="company-intro" aria-labelledby="company-intro-heading">
+  <div class="container company-intro__inner">
+    <header class="company-intro__header">
+      <h2 class="company-intro__title" id="company-intro-heading">
+        Ihr Weg zur Solaranlage:
+        <span class="company-intro__highlight">Beratung, Planung, Installation</span>
+      </h2>
+    </header>
+
+    <div class="company-intro__grid">
+      <div class="company-intro__content">
+        <h3>Erfahrung und Leidenschaft für Solartechnik</h3>
+
+        <p>
+          Die Cadani Solarinstallation GmbH ist Ihr regionaler Partner für Photovoltaikanlagen in Berlin
+          und Brandenburg. Wir liefern schlüsselfertige Solaranlagen – von der ersten Beratung über die
+          detaillierte Planung bis hin zur fachgerechten Montage, auf Wunsch inklusive Stromspeicher und
+          Wallbox für eine optimale Eigenversorgung.
+        </p>
+
+        <p>
+          Dabei arbeiten wir herstellerunabhängig und sind an keine festen Partner gebunden. Das ermöglicht
+          uns, alle gängigen Komponenten am Markt zu verbauen und die Auswahl exakt auf Ihre Bedürfnisse
+          abzustimmen. Ob Module, Wechselrichter, Speicherlösungen oder Ladetechnik: Wir entscheiden frei
+          und kundenorientiert, welche Produkte technisch und wirtschaftlich am besten zu Ihrem Projekt
+          passen.
+        </p>
+
+        <p>
+          Durch diese Unabhängigkeit können wir flexibel auf individuelle Wünsche eingehen, optimale
+          Lösungen entwickeln und Ihnen ein maßgeschneidertes Komplettpaket bieten – zuverlässig, modern
+          und zukunftssicher.
+        </p>
+      </div>
+
+      <div class="company-intro__media">
+        <!-- TODO: Video später lokal in public/videos speichern und komprimieren -->
+        <video
+          class="company-intro__video"
+          controls
+          preload="metadata"
+          poster={posterSrc}
+          width="100%"
+          aria-label="Unternehmensvideo der Cadani Solarinstallation GmbH"
+          title="Unternehmensvideo der Cadani Solarinstallation GmbH"
+        >
+          <source src={videoSrc} type="video/mp4" />
+          <!-- TODO: <track kind="captions" src="/videos/cadani-film.vtt" srclang="de" label="Deutsch" /> später für Untertitel ergänzen -->
+          Ihr Browser unterstützt dieses Video nicht.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>

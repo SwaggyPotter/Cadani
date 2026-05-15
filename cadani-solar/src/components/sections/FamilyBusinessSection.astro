@@ -1,0 +1,55 @@
+---
+const imageSrc = 'https://cdn1.site-media.eu/images/1200/11578691/Dachinstallation.png';
+---
+
+<section class="family-business" aria-labelledby="family-business-heading">
+  <div class="container family-business__inner">
+    <div class="family-business__grid">
+      <div class="family-business__content">
+        <h2 class="family-business__title" id="family-business-heading">Zwei Brüder, eine Mission</h2>
+        <div class="family-business__separator" aria-hidden="true"></div>
+
+        <h3 class="family-business__subtitle">Das Familienunternehmen</h3>
+
+        <div class="family-business__text">
+          <p>
+            Die Cadani Solarinstallation GmbH wurde 2023 von den Brüdern Nico Kurzweil und David
+            Rusinowski gegründet, mit dem Ziel, Photovoltaikanlagen in Berlin und Brandenburg einfach,
+            transparent und zuverlässig umzusetzen.
+          </p>
+
+          <p>
+            Als regionales Familienunternehmen planen und installieren wir PV-Anlagen, Stromspeicher und
+            Wallboxen – herstellerunabhängig und individuell auf Ihr Gebäude abgestimmt. Von der
+            persönlichen Beratung über die Fördermittelberatung, zum Beispiel SolarPLUS / IBB, die
+            Netzbetreiberanmeldung, den Zählerschrank-Check bis hin zu Installation und Wartung erhalten
+            Sie bei uns Solarenergie aus einer Hand.
+          </p>
+
+          <p>
+            So entsteht eine wirtschaftliche Photovoltaik-Lösung, die sich rechnet, langfristig überzeugt
+            und nachhaltig begeistert.
+          </p>
+        </div>
+
+        <div class="family-business__actions">
+          <!-- TODO: Solarechner-Seite später erstellen -->
+          <a class="button button--primary" href="/solarrechner">Unser Solarechner</a>
+        </div>
+      </div>
+
+      <div class="family-business__media">
+        <!-- TODO: Bild später lokal in public/images/company speichern und als WebP/AVIF optimieren -->
+        <img
+          class="family-business__image"
+          src={imageSrc}
+          alt="Dachinstallation einer Photovoltaikanlage durch Cadani Solar"
+          width="1200"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
