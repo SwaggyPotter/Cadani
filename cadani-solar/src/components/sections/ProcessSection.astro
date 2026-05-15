@@ -1,0 +1,31 @@
+---
+import SectionTitle from '@components/ui/SectionTitle.astro';
+
+interface ProcessStep {
+  title: string;
+  text?: string;
+}
+
+interface Props {
+  title?: string;
+  steps?: ProcessStep[];
+}
+
+const { title = 'Ablauf', steps = [] } = Astro.props;
+---
+
+<section class="section process-section" aria-labelledby="process-heading">
+  <div class="container stack">
+    <SectionTitle title={title} />
+    <ol class="grid">
+      {
+        steps.map((step) => (
+          <li>
+            <h3>{step.title}</h3>
+            {step.text && <p>{step.text}</p>}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

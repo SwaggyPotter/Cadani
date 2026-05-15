@@ -1,0 +1,18 @@
+---
+interface Props {
+  name?: string;
+  url?: string;
+  telephone?: string;
+}
+
+const { name = 'Cadani Solar', url = 'https://www.cadani-solar.de', telephone } = Astro.props;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name,
+  url,
+  ...(telephone ? { telephone } : {}),
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

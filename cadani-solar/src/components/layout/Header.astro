@@ -1,0 +1,41 @@
+---
+import MobileMenu from './MobileMenu.astro';
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  navItems?: NavItem[];
+}
+
+const {
+  navItems = [
+    { label: 'Leistungen', href: '/leistungen/' },
+    { label: 'Referenzen', href: '/referenzen/' },
+    { label: 'Wissen', href: '/wissen/' },
+    { label: 'Kontakt', href: '/kontakt/' },
+  ],
+} = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-logo" href="/" aria-label="Cadani Solar Startseite">Cadani Solar</a>
+
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <MobileMenu items={navItems} />
+  </div>
+</header>

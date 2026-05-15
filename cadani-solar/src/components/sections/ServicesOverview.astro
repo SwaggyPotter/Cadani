@@ -1,0 +1,26 @@
+---
+import ServiceCard from '@components/cards/ServiceCard.astro';
+import SectionTitle from '@components/ui/SectionTitle.astro';
+
+interface ServiceItem {
+  title: string;
+  text?: string;
+  href?: string;
+}
+
+interface Props {
+  title?: string;
+  services?: ServiceItem[];
+}
+
+const { title = 'Leistungen', services = [] } = Astro.props;
+---
+
+<section class="section services-overview" aria-labelledby="services-heading">
+  <div class="container stack">
+    <SectionTitle title={title} />
+    <div class="grid">
+      {services.map((service) => <ServiceCard {...service} />)}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import ReferenceCard from '@components/cards/ReferenceCard.astro';
+import SectionTitle from '@components/ui/SectionTitle.astro';
+
+interface ReferenceItem {
+  title: string;
+  location?: string;
+  href?: string;
+}
+
+interface Props {
+  title?: string;
+  references?: ReferenceItem[];
+}
+
+const { title = 'Referenzen', references = [] } = Astro.props;
+---
+
+<section class="section references-preview" aria-labelledby="references-heading">
+  <div class="container stack">
+    <SectionTitle title={title} />
+    <div class="grid">
+      {references.map((reference) => <ReferenceCard {...reference} />)}
+    </div>
+  </div>
+</section>

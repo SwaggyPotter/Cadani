@@ -46,6 +46,7 @@
 
 .site-nav ul,
 .site-footer ul,
+.mobile-menu ul,
 .breadcrumbs ol {
   display: flex;
   flex-wrap: wrap;
@@ -57,8 +58,13 @@
 
 .site-nav a,
 .site-footer a,
+.mobile-menu a,
 .breadcrumbs a {
   text-decoration: none;
+}
+
+.mobile-menu {
+  display: none;
 }
 
 .site-footer {
@@ -143,5 +149,20 @@
     border-inline-start: 1px solid var(--color-border);
     padding-block-start: 0;
     padding-inline-start: var(--space-lg);
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .site-nav {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .mobile-menu ul {
+    flex-direction: column;
+    padding-block-start: var(--space-sm);
   }
 }

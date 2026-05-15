@@ -1,0 +1,17 @@
+---
+import SectionTitle from '@components/ui/SectionTitle.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const { title = 'Warum Cadani Solar', text } = Astro.props;
+---
+
+<section class="section why-us-section" aria-labelledby="why-us-heading">
+  <div class="container stack">
+    <SectionTitle title={title} text={text} />
+    <slot />
+  </div>
+</section>

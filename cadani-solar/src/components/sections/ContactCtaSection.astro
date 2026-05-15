@@ -1,0 +1,25 @@
+---
+import Button from '@components/ui/Button.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+}
+
+const {
+  title = 'Kontakt aufnehmen',
+  text,
+  buttonLabel = 'Kontakt',
+  buttonHref = '/kontakt/',
+} = Astro.props;
+---
+
+<section class="section contact-cta-section" aria-labelledby="contact-cta-heading">
+  <div class="container stack">
+    <h2 id="contact-cta-heading">{title}</h2>
+    {text && <p>{text}</p>}
+    <Button href={buttonHref} label={buttonLabel} />
+  </div>
+</section>

@@ -1,0 +1,20 @@
+---
+import Button from '@components/ui/Button.astro';
+
+interface Props {
+  title: string;
+  text?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { title, text, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="section hero-section" aria-labelledby="hero-heading">
+  <div class="container stack">
+    <h1 id="hero-heading">{title}</h1>
+    {text && <p>{text}</p>}
+    {ctaLabel && ctaHref && <Button href={ctaHref} label={ctaLabel} />}
+  </div>
+</section>
