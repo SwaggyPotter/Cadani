@@ -3,15 +3,64 @@ interface Props {
   name?: string;
   url?: string;
   telephone?: string;
+  email?: string;
+  address?: {
+    streetAddress?: string;
+    postalCode?: string;
+    addressLocality?: string;
+    addressCountry?: string;
+  };
+  areaServed?: string[];
+  services?: Array<{
+    name: string;
+    description?: string;
+    url?: string;
+  }>;
 }
 
-const { name = 'Cadani Solar', url = 'https://www.cadani-solar.de', telephone } = Astro.props;
+const {
+  name = 'Firmenname Platzhalter',
+  url = 'https://www.cadani-solar.de',
+  telephone,
+  email,
+  address,
+  areaServed = ['Berlin', 'Brandenburg'],
+  services = [],
+} = Astro.props;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name,
   url,
+  areaServed,
   ...(telephone ? { telephone } : {}),
+  ...(email ? { email } : {}),
+  ...(address
+    ? {
+        address: {
+          '@type': 'PostalAddress',
+          ...address,
+        },
+      }
+    : {}),
+  ...(services.length > 0
+    ? {
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Leistungen',
+          itemListElement: services.map((service) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: service.name,
+              ...(service.description ? { description: service.description } : {}),
+              ...(service.url ? { url: service.url } : {}),
+            },
+          })),
+        },
+      }
+    : {}),
 };
 ---
 
