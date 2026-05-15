@@ -1,0 +1,29 @@
+:root {
+  --color-surface: #ffffff;
+  --color-surface-muted: #f5f7f6;
+  --color-text: #17211d;
+  --color-text-muted: #5c6762;
+  --color-primary: #0f766e;
+  --color-primary-contrast: #ffffff;
+  --color-accent: #f5b301;
+  --color-border: #dfe7e3;
+
+  --font-sans: system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', sans-serif;
+
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  --container-max: 72rem;
+  --container-padding: clamp(1rem, 4vw, 2rem);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+
+  --shadow-sm: 0 1px 2px rgb(23 33 29 / 0.08);
+}

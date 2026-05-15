@@ -1,0 +1,25 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: var(--space-sm);
+  inset-inline-start: var(--space-sm);
+  z-index: 10;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
