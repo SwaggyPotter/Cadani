@@ -1,0 +1,72 @@
+---
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate?: Date;
+  updatedDate?: Date;
+  author?: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  updatedDate,
+  author,
+  breadcrumbs = [],
+} = Astro.props;
+
+const hasSidebar = Astro.slots.has('sidebar');
+const dateFormatter = new Intl.DateTimeFormat('de-DE', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} type="article">
+  <main id="main-content">
+    <div class="container">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+
+    <article class="article-layout">
+      <header class="article-header stack">
+        <h1>{title}</h1>
+        <p>{description}</p>
+        {
+          (publishDate || updatedDate || author) && (
+            <div class="article-meta" aria-label="Artikelinformationen">
+              {author && <span>{author}</span>}
+              {publishDate && <time datetime={publishDate.toISOString()}>{dateFormatter.format(publishDate)}</time>}
+              {updatedDate && <time datetime={updatedDate.toISOString()}>Aktualisiert: {dateFormatter.format(updatedDate)}</time>}
+            </div>
+          )
+        }
+      </header>
+
+      <div class:list={['article-shell', hasSidebar && 'article-shell--with-sidebar']}>
+        <div class="article-content">
+          <slot />
+        </div>
+
+        {
+          hasSidebar && (
+            <aside class="article-sidebar" aria-label="Artikel Sidebar">
+              <slot name="sidebar" />
+            </aside>
+          )
+        }
+      </div>
+    </article>
+  </main>
+</BaseLayout>

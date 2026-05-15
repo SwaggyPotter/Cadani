@@ -1,0 +1,62 @@
+---
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  breadcrumbs?: BreadcrumbItem[];
+  eyebrow?: string;
+  showCta?: boolean;
+  ctaTitle?: string;
+  ctaText?: string;
+}
+
+const {
+  title,
+  description,
+  h1,
+  breadcrumbs = [],
+  eyebrow,
+  showCta = false,
+  ctaTitle = 'CTA Platzhalter',
+  ctaText = 'Platzhalter fuer spaeteren CTA-Bereich.',
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content">
+    <div class="container">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+
+    <header class="page-header">
+      <div class="container stack">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h1>{h1}</h1>
+        <p>{description}</p>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <slot />
+    </div>
+
+    {
+      showCta && (
+        <section class="section page-cta" aria-labelledby="page-cta-heading">
+          <div class="container stack">
+            <h2 id="page-cta-heading">{ctaTitle}</h2>
+            <p>{ctaText}</p>
+          </div>
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>

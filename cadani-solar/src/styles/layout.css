@@ -24,3 +24,124 @@
   display: grid;
   gap: var(--grid-gap, var(--space-lg));
 }
+
+.site-header {
+  border-block-end: 1px solid var(--color-border);
+}
+
+.site-header__inner,
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-md);
+}
+
+.site-logo {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-nav ul,
+.site-footer ul,
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.site-nav a,
+.site-footer a,
+.breadcrumbs a {
+  text-decoration: none;
+}
+
+.site-footer {
+  border-block-start: 1px solid var(--color-border);
+}
+
+.breadcrumbs {
+  padding-block-start: var(--space-md);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.breadcrumbs li + li::before {
+  content: '/';
+  margin-inline-end: var(--space-sm);
+  color: var(--color-border);
+}
+
+.page-header,
+.article-header {
+  padding-block: clamp(var(--space-2xl), 7vw, var(--space-3xl));
+}
+
+.page-content {
+  min-height: 12rem;
+}
+
+.page-cta {
+  background: var(--color-surface-muted);
+}
+
+.eyebrow,
+.article-meta {
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.article-layout {
+  width: min(100% - (var(--container-padding) * 2), 48rem);
+  margin-inline: auto;
+}
+
+.article-shell {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.article-shell--with-sidebar {
+  width: min(100%, var(--container-max));
+  margin-inline: 50%;
+  transform: translateX(-50%);
+}
+
+.article-content {
+  max-width: 48rem;
+}
+
+.article-content > * + * {
+  margin-block-start: var(--space-lg);
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.article-sidebar {
+  border-block-start: 1px solid var(--color-border);
+  padding-block-start: var(--space-lg);
+}
+
+@media (min-width: 56rem) {
+  .article-shell--with-sidebar {
+    grid-template-columns: minmax(0, 48rem) minmax(14rem, 18rem);
+    align-items: start;
+  }
+
+  .article-sidebar {
+    border-block-start: 0;
+    border-inline-start: 1px solid var(--color-border);
+    padding-block-start: 0;
+    padding-inline-start: var(--space-lg);
+  }
+}
