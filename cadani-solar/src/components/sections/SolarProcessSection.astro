@@ -1,0 +1,53 @@
+---
+import { solarProcessSteps } from '@data/solarProcess';
+---
+
+<section class="solar-process" aria-labelledby="solar-process-heading">
+  <div class="container solar-process__inner">
+    <header class="solar-process__header">
+      <h2 class="solar-process__title" id="solar-process-heading">
+        In nur 7 Tagen zur fertigen Solaranlage
+      </h2>
+      <p class="solar-process__intro">
+        So läuft Ihr Solarprojekt bei Cadani – von der Anfrage bis zum ersten Sonnenstrom.
+      </p>
+    </header>
+
+    <!-- TODO: Prozessbilder später lokal in public/images/process speichern und als WebP/AVIF optimieren -->
+    <ol class="solar-process__list">
+      {
+        solarProcessSteps.map((step) => (
+          <li>
+            <article
+              class:list={[
+                'solar-process__item',
+                step.imagePosition === 'right' && 'solar-process__item--reverse',
+              ]}
+            >
+              <div class="solar-process__media">
+                <img
+                  class="solar-process__image"
+                  src={step.image}
+                  alt={step.imageAlt}
+                  width="1024"
+                  height="680"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <div class="solar-process__content">
+                <div class="solar-process__meta">
+                  <span class="solar-process__number">{String(step.number).padStart(2, '0')}</span>
+                  <span class="solar-process__emoji" aria-hidden="true">{step.iconEmoji}</span>
+                </div>
+                <h3 class="solar-process__step-title">{step.title}</h3>
+                <p class="solar-process__text">{step.text}</p>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

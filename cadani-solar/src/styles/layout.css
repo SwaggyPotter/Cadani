@@ -752,6 +752,103 @@
   color: var(--color-yellow-400);
 }
 
+.solar-process {
+  background: var(--color-white);
+}
+
+.solar-process__inner {
+  display: grid;
+  gap: clamp(var(--space-2xl), 6vw, var(--space-4xl));
+  padding-block: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+}
+
+.solar-process__header {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.solar-process__title {
+  max-width: none;
+  color: var(--color-blue-950);
+}
+
+.solar-process__intro {
+  margin-inline: auto;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+}
+
+.solar-process__list {
+  display: grid;
+  gap: clamp(var(--space-2xl), 6vw, var(--space-4xl));
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.solar-process__item {
+  display: grid;
+  gap: 0;
+}
+
+.solar-process__media {
+  min-width: 0;
+}
+
+.solar-process__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  object-fit: cover;
+}
+
+.solar-process__content {
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-block-start: 0;
+  border-inline-start: 0.375rem solid var(--color-success);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--color-surface-muted);
+  box-shadow: var(--shadow-sm);
+}
+
+.solar-process__meta {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.solar-process__number {
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  color: var(--color-text-inverse);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.solar-process__emoji {
+  font-size: var(--font-size-lg);
+  line-height: 1;
+}
+
+.solar-process__step-title {
+  color: var(--color-blue-950);
+}
+
+.solar-process__text {
+  max-width: 62ch;
+}
+
 @keyframes hero-fade-in {
   from {
     opacity: 0;
@@ -836,6 +933,40 @@
 
   .family-business__grid {
     grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
+  }
+
+  .solar-process__item {
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    align-items: center;
+  }
+
+  .solar-process__item--reverse {
+    grid-template-columns: minmax(20rem, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .solar-process__item--reverse .solar-process__media {
+    grid-column: 2;
+  }
+
+  .solar-process__item--reverse .solar-process__content {
+    grid-column: 1;
+    grid-row: 1;
+    margin-inline: 0 -2rem;
+  }
+
+  .solar-process__image {
+    min-height: 22rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  .solar-process__content {
+    position: relative;
+    z-index: 1;
+    margin-inline: -2rem 0;
+    border-block-start: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
   }
 
   .article-shell--with-sidebar {
