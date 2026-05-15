@@ -1,0 +1,240 @@
+---
+import OptionCard from '@components/ui/OptionCard.astro';
+
+const roofOptions = ['Satteldach', 'Flachdach', 'Pultdach', 'Walmdach'];
+const householdOptions = ['1–2 Personen', '3–4 Personen', '5+ Personen', 'Gewerbe'];
+const storageOptions = ['Ja', 'Nein', 'Beratung gewünscht'];
+---
+
+<section class="pv-configurator" aria-labelledby="pv-configurator-title">
+  <div class="configurator-page__container">
+    <div class="configurator-page__section-header configurator-page__section-header--center">
+      <p>PV-Konfigurator</p>
+      <h2 id="pv-configurator-title">Kostenloses Solaranlagen Angebot vorbereiten</h2>
+      <span>
+        Beantworten Sie wenige Fragen. Wir prüfen Ihre Angaben und melden uns mit einer passenden
+        Einschätzung für Ihr Photovoltaik-Projekt in Berlin oder Brandenburg.
+      </span>
+    </div>
+
+    <form class="pv-configurator__form" data-pv-configurator aria-label="Solaranlagen Konfigurator">
+      <div class="pv-configurator__progress" aria-live="polite">
+        <span data-pv-step-status>Schritt 1 von 4</span>
+        <div class="pv-configurator__progress-track" aria-hidden="true">
+          <span class="pv-configurator__progress-bar" data-pv-progress-bar></span>
+        </div>
+      </div>
+
+      <div class="pv-configurator__error" data-pv-error aria-live="polite" hidden></div>
+      <div class="pv-configurator__success" data-pv-success aria-live="polite" hidden>
+        Vielen Dank. Ihre Anfrage wurde vorbereitet. Die technische Formularanbindung wird im
+        nächsten Schritt ergänzt.
+      </div>
+
+      <fieldset class="pv-configurator__step" data-pv-step="1">
+        <legend>
+          <span>Schritt 1</span>
+          Dachart wählen
+        </legend>
+        <div class="pv-configurator__options">
+          {
+            roofOptions.map((option) => (
+              <OptionCard
+                name="roofType"
+                value={option.toLowerCase().replaceAll(' ', '-')}
+                label={option}
+                required
+              />
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="pv-configurator__step" data-pv-step="2" hidden>
+        <legend>
+          <span>Schritt 2</span>
+          Verbrauch / Haushaltsgröße
+        </legend>
+        <div class="pv-configurator__options">
+          {
+            householdOptions.map((option) => (
+              <OptionCard
+                name="household"
+                value={option.toLowerCase().replaceAll(' ', '-')}
+                label={option}
+                required
+              />
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="pv-configurator__step" data-pv-step="3" hidden>
+        <legend>
+          <span>Schritt 3</span>
+          Speicher gewünscht?
+        </legend>
+        <div class="pv-configurator__options">
+          {
+            storageOptions.map((option) => (
+              <OptionCard
+                name="storage"
+                value={option.toLowerCase().replaceAll(' ', '-')}
+                label={option}
+                required
+              />
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="pv-configurator__step" data-pv-step="4" hidden>
+        <legend>
+          <span>Schritt 4</span>
+          Kontaktdaten
+        </legend>
+        <div class="pv-configurator__fields">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            <span>Telefon</span>
+            <input type="tel" name="phone" autocomplete="tel" required />
+          </label>
+          <label>
+            <span>E-Mail</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Nachricht</span>
+            <textarea name="message" rows="5" placeholder="Was ist Ihnen bei Ihrer Solaranlage wichtig?"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="pv-configurator__actions">
+        <button class="pv-configurator__button pv-configurator__button--secondary" type="button" data-pv-prev hidden>
+          Zurück
+        </button>
+        <button class="pv-configurator__button pv-configurator__button--primary" type="button" data-pv-next>
+          Weiter
+        </button>
+        <button class="pv-configurator__button pv-configurator__button--primary" type="submit" data-pv-submit hidden>
+          Kostenloses Angebot anfragen
+        </button>
+      </div>
+
+      <div class="pv-configurator__whatsapp">
+        <a href="https://wa.me/4915206341767" target="_blank" rel="noopener noreferrer">
+          Direkt per WhatsApp beraten lassen
+        </a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const configurators = document.querySelectorAll<HTMLFormElement>('[data-pv-configurator]');
+
+  configurators.forEach((form) => {
+    const totalSteps = 4;
+    let currentStep = 1;
+
+    const steps = Array.from(form.querySelectorAll<HTMLElement>('[data-pv-step]'));
+    const status = form.querySelector<HTMLElement>('[data-pv-step-status]');
+    const progressBar = form.querySelector<HTMLElement>('[data-pv-progress-bar]');
+    const error = form.querySelector<HTMLElement>('[data-pv-error]');
+    const success = form.querySelector<HTMLElement>('[data-pv-success]');
+    const previousButton = form.querySelector<HTMLButtonElement>('[data-pv-prev]');
+    const nextButton = form.querySelector<HTMLButtonElement>('[data-pv-next]');
+    const submitButton = form.querySelector<HTMLButtonElement>('[data-pv-submit]');
+
+    const setError = (message = '') => {
+      if (!error) return;
+      error.textContent = message;
+      error.hidden = !message;
+    };
+
+    const getCurrentStep = () => steps.find((step) => Number(step.dataset.pvStep) === currentStep);
+
+    const showStep = () => {
+      steps.forEach((step) => {
+        step.hidden = Number(step.dataset.pvStep) !== currentStep;
+      });
+      if (status) status.textContent = `Schritt ${currentStep} von ${totalSteps}`;
+      if (progressBar) progressBar.style.inlineSize = `${(currentStep / totalSteps) * 100}%`;
+      if (previousButton) previousButton.hidden = currentStep === 1;
+      if (nextButton) nextButton.hidden = currentStep === totalSteps;
+      if (submitButton) submitButton.hidden = currentStep !== totalSteps;
+      setError();
+    };
+
+    const validateStep = () => {
+      const step = getCurrentStep();
+      if (!step) return true;
+
+      const requiredFields = Array.from(
+        step.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'),
+      );
+      const radioGroups = new Set(
+        requiredFields
+          .filter((field) => field instanceof HTMLInputElement && field.type === 'radio')
+          .map((field) => field.name),
+      );
+
+      for (const groupName of radioGroups) {
+        if (!form.querySelector<HTMLInputElement>(`input[name="${groupName}"]:checked`)) {
+          setError('Bitte wählen Sie eine Option aus.');
+          return false;
+        }
+      }
+
+      for (const field of requiredFields) {
+        if (field instanceof HTMLInputElement && field.type === 'radio') continue;
+        if (!field.value.trim()) {
+          setError('Bitte füllen Sie alle Pflichtfelder aus.');
+          field.focus();
+          return false;
+        }
+        if (field instanceof HTMLInputElement && field.type === 'email' && !field.validity.valid) {
+          setError('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+          field.focus();
+          return false;
+        }
+      }
+
+      return true;
+    };
+
+    nextButton?.addEventListener('click', () => {
+      if (!validateStep()) return;
+      currentStep = Math.min(currentStep + 1, totalSteps);
+      showStep();
+    });
+
+    previousButton?.addEventListener('click', () => {
+      currentStep = Math.max(currentStep - 1, 1);
+      showStep();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!validateStep()) return;
+
+      const formData = new FormData(form);
+      console.log('PV configurator request', Object.fromEntries(formData.entries()));
+
+      if (success) success.hidden = false;
+      form.querySelectorAll<HTMLFieldSetElement>('fieldset').forEach((fieldset) => {
+        fieldset.disabled = true;
+      });
+      previousButton?.setAttribute('hidden', '');
+      submitButton?.setAttribute('hidden', '');
+      setError();
+    });
+
+    form.addEventListener('change', () => setError());
+    showStep();
+  });
+</script>

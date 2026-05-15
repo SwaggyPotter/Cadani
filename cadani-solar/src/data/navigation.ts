@@ -11,7 +11,7 @@ export const mainNavigation: NavigationItem[] = [
     href: '/ueber-uns',
     children: [{ label: 'Zertifikate', href: '/zertifikate' }],
   },
-  { label: 'Konfigurator', href: '/angebot_Solaranlage' },
+  { label: 'Konfigurator', href: '/angebot-solaranlage' },
   { label: 'Strom & Gas', href: '/strom-gas' },
   { label: 'Check', href: '/check' },
   { label: 'Produkte', href: '/produkte' },

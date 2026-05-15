@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ConfiguratorBenefits from '@components/sections/ConfiguratorBenefits.astro';
+import PvConfiguratorSection from '@components/sections/PvConfiguratorSection.astro';
+import '@styles/pages/pv-configurator.css';
+
+const title = 'Solaranlage Angebot anfragen Berlin & Brandenburg | Cadani Solar';
+const description =
+  'Konfigurieren Sie Ihre Photovoltaikanlage in wenigen Minuten und erhalten Sie ein individuelles Angebot von Cadani Solar für Berlin und Brandenburg.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content" class="configurator-page">
+    <section class="configurator-hero" aria-labelledby="configurator-hero-title">
+      <div class="configurator-page__container configurator-hero__inner">
+        <div class="configurator-hero__content">
+          <p class="configurator-hero__eyebrow">Solaranlagen Angebot</p>
+          <h1 id="configurator-hero-title">Ihr Solaranlagen Angebot</h1>
+          <p class="configurator-hero__subheadline">
+            Nutzen Sie die Kraft der Sonne für eine saubere Zukunft.
+          </p>
+          <div class="configurator-hero__actions" aria-label="Direkte Aktionen">
+            <a class="configurator-button configurator-button--primary" href="#pv-konfigurator">
+              PV-Anlage konfigurieren
+            </a>
+            <a
+              class="configurator-button configurator-button--secondary"
+              href="https://wa.me/4915206341767"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp Beratung
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="configurator-intro" aria-labelledby="configurator-intro-title">
+      <div class="configurator-page__container configurator-intro__grid">
+        <div class="configurator-page__section-header">
+          <p>Einfach starten</p>
+          <h2 id="configurator-intro-title">Konfigurieren Sie jetzt Ihre Photovoltaikanlage!</h2>
+          <span>Mit uns planen Sie Ihre Solaranlage schnell und einfach.</span>
+        </div>
+
+        <div class="configurator-intro__copy">
+          <p>
+            Cadani Solarinstallation plant Solaranlagen nach Ihren Wünschen und den technischen
+            Möglichkeiten Ihres Gebäudes. Über das PV-Anlagen Formular teilen Sie uns die wichtigsten
+            Eckdaten zu Dachart, Verbrauch, Speicherwunsch und Kontakt mit.
+          </p>
+          <p>
+            Danach erhalten Sie einen Kostenvoranschlag und eine detaillierte
+            Wirtschaftlichkeitsberechnung. So wird aus der ersten Idee schnell ein konkretes
+            Photovoltaik Angebot für Berlin oder Brandenburg.
+          </p>
+          <ul class="configurator-intro__facts">
+            <li>PV-Anlage konfigurieren in wenigen Minuten</li>
+            <li>Solarberatung Berlin und Brandenburg</li>
+            <li>Planung für Solaranlage, Speicher und Wallbox</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div id="pv-konfigurator">
+      <PvConfiguratorSection />
+    </div>
+
+    <ConfiguratorBenefits />
+
+    <section class="configurator-cta" aria-labelledby="configurator-cta-title">
+      <div class="configurator-page__container configurator-cta__inner">
+        <div>
+          <p class="configurator-hero__eyebrow">Nächster Schritt</p>
+          <h2 id="configurator-cta-title">Bereit für Ihr individuelles Photovoltaik Angebot?</h2>
+          <p>
+            Starten Sie den Konfigurator oder schreiben Sie direkt per WhatsApp. Cadani prüft Ihr
+            Projekt persönlich und meldet sich mit einer passenden Einschätzung.
+          </p>
+        </div>
+        <div class="configurator-cta__actions">
+          <a class="configurator-button configurator-button--primary" href="#pv-konfigurator">
+            Angebot anfragen
+          </a>
+          <a
+            class="configurator-button configurator-button--secondary"
+            href="https://wa.me/4915206341767"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp Beratung
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

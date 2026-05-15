@@ -1,0 +1,49 @@
+---
+const benefits = [
+  {
+    title: 'Persönliche Beratung',
+    text: 'Sie sprechen mit einem regional erreichbaren Team statt mit einem anonymen Callcenter.',
+  },
+  {
+    title: 'Planung nach Verbrauch und Dachfläche',
+    text: 'Die Anlage wird passend zu Strombedarf, Dachausrichtung, Speicherwunsch und Budget geplant.',
+  },
+  {
+    title: 'Installation durch erfahrenes Team',
+    text: 'Cadani begleitet die fachgerechte Umsetzung von der Montage bis zur Inbetriebnahme.',
+  },
+  {
+    title: 'Unterstützung bei Speicherlösungen',
+    text: 'Wir prüfen, ob ein Stromspeicher, eine Wallbox oder Energiemanagement sinnvoll ist.',
+  },
+  {
+    title: 'Regionale Nähe in Berlin & Brandenburg',
+    text: 'Kurze Wege, klare Ansprechpartner und Erfahrung mit regionalen Abläufen.',
+  },
+];
+---
+
+<section class="configurator-benefits" aria-labelledby="configurator-benefits-title">
+  <div class="configurator-page__container">
+    <div class="configurator-page__section-header">
+      <p>Warum Cadani?</p>
+      <h2 id="configurator-benefits-title">Solarberatung mit klarer Planung</h2>
+      <span>
+        Ein gutes Photovoltaik-Angebot beginnt nicht bei der Modulanzahl, sondern bei Ihrem Dach,
+        Ihrem Verbrauch und Ihren Zielen.
+      </span>
+    </div>
+
+    <div class="configurator-benefits__grid">
+      {
+        benefits.map((benefit, index) => (
+          <article class="configurator-benefits__card">
+            <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{benefit.title}</h3>
+            <p>{benefit.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
