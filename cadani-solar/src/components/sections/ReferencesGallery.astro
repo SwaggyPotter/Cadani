@@ -1,0 +1,184 @@
+---
+import { Image } from 'astro:assets';
+import { references } from '@data/references';
+import '@styles/components/references-gallery.css';
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Unsere Referenzen',
+  image: references.map((reference) => ({
+    '@type': 'ImageObject',
+    contentUrl: reference.src,
+    name: reference.title,
+    description: reference.alt,
+  })),
+};
+---
+
+<section class="references-gallery" aria-labelledby="references-gallery-heading">
+  <div class="references-gallery__inner">
+    <header class="references-gallery__header">
+      <h2 class="references-gallery__title" id="references-gallery-heading">Unsere Referenzen</h2>
+      <p class="references-gallery__intro">
+        Realisierte Photovoltaik-Projekte, Dachmontagen und Anlagenlösungen aus Berlin und Brandenburg.
+      </p>
+    </header>
+
+    <div class="references-gallery__grid" data-references-gallery>
+      {
+        references.map((reference, index) => (
+          <article class="references-gallery__item" data-gallery-item>
+            <button
+              class="references-gallery__button"
+              type="button"
+              data-gallery-trigger
+              data-index={index}
+              aria-label={`${reference.title ?? 'Referenzbild'} öffnen`}
+            >
+              <Image
+                class="references-gallery__image"
+                src={reference.src}
+                alt={reference.alt}
+                width={reference.width}
+                height={reference.height}
+                widths={[360, 520, 720, 960]}
+                sizes="(min-width: 80rem) 25vw, (min-width: 64rem) 33vw, (min-width: 48rem) 50vw, 100vw"
+                loading={index < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+                inferSize
+              />
+              {(reference.title || reference.location || reference.power) && (
+                <span class="references-gallery__caption">
+                  {reference.title && <strong>{reference.title}</strong>}
+                  {reference.location && <span>{reference.location}</span>}
+                  {reference.power && <span>{reference.power}</span>}
+                </span>
+              )}
+            </button>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="references-lightbox" data-gallery-lightbox hidden>
+    <button class="references-lightbox__close" type="button" data-gallery-close aria-label="Galerie schließen">
+      ×
+    </button>
+    <button class="references-lightbox__nav references-lightbox__nav--prev" type="button" data-gallery-prev aria-label="Vorheriges Bild">
+      ‹
+    </button>
+    <figure class="references-lightbox__figure" data-gallery-dialog aria-live="polite">
+      <img class="references-lightbox__image" src="" alt="" data-gallery-image />
+      <figcaption class="references-lightbox__caption" data-gallery-caption></figcaption>
+    </figure>
+    <button class="references-lightbox__nav references-lightbox__nav--next" type="button" data-gallery-next aria-label="Nächstes Bild">
+      ›
+    </button>
+  </div>
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />
+</section>
+
+<script>
+  const galleries = document.querySelectorAll<HTMLElement>('[data-references-gallery]');
+
+  galleries.forEach((gallery) => {
+    const lightbox = document.querySelector<HTMLElement>('[data-gallery-lightbox]');
+    const image = lightbox?.querySelector<HTMLImageElement>('[data-gallery-image]');
+    const caption = lightbox?.querySelector<HTMLElement>('[data-gallery-caption]');
+    const closeButton = lightbox?.querySelector<HTMLButtonElement>('[data-gallery-close]');
+    const previousButton = lightbox?.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+    const nextButton = lightbox?.querySelector<HTMLButtonElement>('[data-gallery-next]');
+    const triggers = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-trigger]'));
+    const items = Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-item]'));
+    const references = Array.from(gallery.querySelectorAll<HTMLImageElement>('.references-gallery__image')).map(
+      (img, index) => ({
+        src: img.currentSrc || img.src,
+        alt: img.alt,
+        title: triggers[index]?.querySelector('strong')?.textContent?.trim() ?? '',
+        meta: Array.from(triggers[index]?.querySelectorAll('.references-gallery__caption span') ?? [])
+          .map((node) => node.textContent?.trim())
+          .filter(Boolean)
+          .join(' · '),
+      }),
+    );
+
+    let activeIndex = 0;
+    let touchStartX = 0;
+
+    const setActiveImage = (index: number) => {
+      if (!image || !caption || references.length === 0) return;
+      activeIndex = (index + references.length) % references.length;
+      const active = references[activeIndex];
+      image.src = active.src;
+      image.alt = active.alt;
+      caption.textContent = [active.title, active.meta].filter(Boolean).join(' · ');
+    };
+
+    const openLightbox = (index: number) => {
+      if (!lightbox) return;
+      setActiveImage(index);
+      lightbox.hidden = false;
+      lightbox.dataset.open = 'true';
+      document.documentElement.classList.add('references-lightbox-open');
+      closeButton?.focus();
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.dataset.open = 'false';
+      lightbox.hidden = true;
+      document.documentElement.classList.remove('references-lightbox-open');
+      triggers[activeIndex]?.focus();
+    };
+
+    triggers.forEach((trigger, index) => {
+      trigger.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeButton?.addEventListener('click', closeLightbox);
+    previousButton?.addEventListener('click', () => setActiveImage(activeIndex - 1));
+    nextButton?.addEventListener('click', () => setActiveImage(activeIndex + 1));
+
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    lightbox?.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0]?.clientX ?? 0;
+    });
+
+    lightbox?.addEventListener('touchend', (event) => {
+      const touchEndX = event.changedTouches[0]?.clientX ?? 0;
+      const delta = touchEndX - touchStartX;
+      if (Math.abs(delta) < 48) return;
+      setActiveImage(delta > 0 ? activeIndex - 1 : activeIndex + 1);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (lightbox?.hidden) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') setActiveImage(activeIndex - 1);
+      if (event.key === 'ArrowRight') setActiveImage(activeIndex + 1);
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        },
+        { rootMargin: '160px' },
+      );
+
+      items.forEach((item) => observer.observe(item));
+    } else {
+      items.forEach((item) => item.classList.add('is-visible'));
+    }
+  });
+</script>

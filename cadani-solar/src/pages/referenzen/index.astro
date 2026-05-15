@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import ReferencesGallery from '@components/sections/ReferencesGallery.astro';
 import SeoContentPlaceholder from '@components/sections/SeoContentPlaceholder.astro';
 import { projects } from '@data/projects';
 
@@ -18,7 +19,6 @@ const h1 = 'Referenzen & Projekte';
           Ein Überblick über realisierte Solaranlagen von Cadani Solar in Berlin und Brandenburg.
         </p>
 
-        <!-- TODO: Projektbilder später lokal in public/images/references speichern und als WebP/AVIF optimieren -->
         <div class="references-page__grid">
           {
             projects.map((project) => (
@@ -47,6 +47,8 @@ const h1 = 'Referenzen & Projekte';
         </div>
       </div>
     </section>
+
+    <ReferencesGallery />
 
     <SeoContentPlaceholder />
   </main>

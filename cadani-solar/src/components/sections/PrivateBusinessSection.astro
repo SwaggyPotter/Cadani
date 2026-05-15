@@ -1,0 +1,77 @@
+---
+import '@styles/components/private-business-section.css';
+
+const trustItems = [
+  'Privat & Gewerbe',
+  'Berlin & Brandenburg',
+  'Planung, Montage & Speicher',
+];
+---
+
+<section class="private-business" aria-labelledby="private-business-heading">
+  <div class="private-business__inner">
+    <div class="private-business__media-card">
+      <span class="private-business__media-label">Projekt in Eberswalde</span>
+      <video
+        class="private-business__video"
+        controls
+        preload="metadata"
+        playsinline
+        poster="/images/references/eberswalde-poster.jpg"
+        aria-label="Projektvideo einer Solarinstallation in Eberswalde"
+      >
+        <source src="/videos/references/eberswalde-projekt.mp4" type="video/mp4" />
+        Ihr Browser unterstützt dieses Video nicht. Bitte kontaktieren Sie Cadani Solar für weitere
+        Informationen zum Projekt in Eberswalde.
+      </video>
+    </div>
+
+    <div class="private-business__content">
+      <p class="private-business__eyebrow">Für Privat und Gewerbe</p>
+      <h2 class="private-business__title" id="private-business-heading">
+        Cadani Solar ist Ihr Partner rund um die Solarinstallation
+      </h2>
+
+      <div class="private-business__text">
+        <p>
+          Cadani Solarinstallation GmbH ist Ihr kompetenter Partner für Solarlösungen in Berlin und
+          Brandenburg. Wir bieten maßgeschneiderte Solarinstallationen für private Haushalte und
+          gewerbliche Kunden an.
+        </p>
+        <p>
+          Unser erfahrenes Team unterstützt Sie dabei, nachhaltige Energiekonzepte zu entwickeln, die auf
+          Ihre individuellen Bedürfnisse abgestimmt sind. Vertrauen Sie auf unsere Expertise, um
+          umweltfreundliche Energie zu nutzen und Ihre Energiekosten langfristig zu senken.
+        </p>
+        <p class="private-business__statement">
+          <strong>Setzen Sie auf erneuerbare Energien mit Cadani Solar.</strong>
+        </p>
+      </div>
+
+      <ul class="private-business__trust" aria-label="Vorteile von Cadani Solar">
+        {
+          trustItems.map((item) => (
+            <li>
+              <span aria-hidden="true">✓</span>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="private-business__actions">
+        <a class="private-business__button private-business__button--primary" href="/kontakt/">
+          Kostenlose Beratung anfragen
+        </a>
+        <a
+          class="private-business__button private-business__button--secondary"
+          href="https://wa.me/DEINE_NUMMER_HIER"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Per WhatsApp schreiben
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
