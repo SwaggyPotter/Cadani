@@ -1,27 +1,79 @@
 ---
-interface MenuItem {
-  label: string;
-  href: string;
-}
+import type { NavigationItem } from '@data/navigation';
 
 interface Props {
-  items?: MenuItem[];
+  items?: NavigationItem[];
 }
 
 const { items = [] } = Astro.props;
 ---
 
-<details class="mobile-menu">
-  <summary>Menue</summary>
-  <nav aria-label="Mobile Navigation">
-    <ul>
+<div class="mobile-menu" data-mobile-menu>
+  <button
+    class="mobile-menu__toggle"
+    type="button"
+    aria-label="Hauptnavigation öffnen"
+    aria-controls="mobile-navigation"
+    aria-expanded="false"
+    data-mobile-menu-toggle
+  >
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
+
+  <nav class="mobile-menu__panel" id="mobile-navigation" aria-label="Mobile Hauptnavigation" hidden>
+    <ul class="mobile-menu__list">
       {
         items.map((item) => (
           <li>
-            <a href={item.href}>{item.label}</a>
+            <a class="mobile-menu__link" href={item.href}>
+              {item.label}
+            </a>
+            {item.children?.length ? (
+              <ul class="mobile-menu__sublist">
+                {item.children.map((child) => (
+                  <li>
+                    <a class="mobile-menu__sublink" href={child.href}>
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </li>
         ))
       }
     </ul>
   </nav>
-</details>
+</div>
+
+<script>
+  const mobileMenu = document.querySelector('[data-mobile-menu]');
+  const toggle = mobileMenu?.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
+  const panel = mobileMenu?.querySelector<HTMLElement>('#mobile-navigation');
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !panel) return;
+
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Hauptnavigation schließen' : 'Hauptnavigation öffnen');
+    panel.hidden = !open;
+    mobileMenu?.classList.toggle('is-open', open);
+  };
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  panel?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+</script>

@@ -1,35 +1,66 @@
 ---
+import { mainNavigation, type NavigationItem } from '@data/navigation';
 import MobileMenu from './MobileMenu.astro';
 
-interface NavItem {
-  label: string;
-  href: string;
-}
-
 interface Props {
-  navItems?: NavItem[];
+  navItems?: NavigationItem[];
 }
 
-const {
-  navItems = [
-    { label: 'Leistungen', href: '/leistungen/' },
-    { label: 'Referenzen', href: '/referenzen/' },
-    { label: 'Wissen', href: '/wissen/' },
-    { label: 'Kontakt', href: '/kontakt/' },
-  ],
-} = Astro.props;
+const { navItems = mainNavigation } = Astro.props;
+
+const normalizePath = (href: string) => {
+  const pathname = href.split('#')[0] || '/';
+  return pathname !== '/' ? pathname.replace(/\/$/, '') : pathname;
+};
+
+const currentPath = normalizePath(Astro.url.pathname);
+const isActive = (item: NavigationItem) =>
+  normalizePath(item.href) === currentPath ||
+  item.children?.some((child) => normalizePath(child.href) === currentPath);
 ---
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="site-logo" href="/" aria-label="Cadani Solar Startseite">Cadani Solar</a>
+    <a class="site-logo" href="/" aria-label="Cadani Solar Startseite">
+      <!-- TODO: Logo spaeter lokal unter public/images/logo/ speichern. -->
+      <img
+        src="https://cdn1.site-media.eu/images/0/7115564/Cadani_web_Logo.svg"
+        alt="Cadani Solarinstallation - Ihr Partner für Photovoltaik Anlagen"
+        width="190"
+        height="54"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
 
     <nav class="site-nav" aria-label="Hauptnavigation">
-      <ul>
+      <ul class="site-nav__list">
         {
           navItems.map((item) => (
-            <li>
-              <a href={item.href}>{item.label}</a>
+            <li class:list={['site-nav__item', item.children?.length && 'site-nav__item--has-dropdown']}>
+              <a
+                class:list={['site-nav__link', isActive(item) && 'is-active']}
+                href={item.href}
+                aria-current={isActive(item) ? 'page' : undefined}
+                aria-haspopup={item.children?.length ? 'true' : undefined}
+              >
+                {item.label}
+              </a>
+              {item.children?.length ? (
+                <ul class="site-nav__dropdown" aria-label={`${item.label} Untermenü`}>
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        class:list={['site-nav__dropdown-link', isActive(child) && 'is-active']}
+                        href={child.href}
+                        aria-current={isActive(child) ? 'page' : undefined}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))
         }

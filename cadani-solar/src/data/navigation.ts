@@ -5,19 +5,18 @@ export interface NavigationItem {
 }
 
 export const mainNavigation: NavigationItem[] = [
+  { label: 'Home', href: '/' },
   {
-    label: 'Leistungen',
-    href: '/leistungen/',
-    children: [
-      { label: 'Photovoltaik', href: '/photovoltaik/' },
-      { label: 'Stromspeicher', href: '/stromspeicher/' },
-      { label: 'Wallbox', href: '/wallbox/' },
-      { label: 'Beratung', href: '/beratung/' },
-    ],
+    label: 'Über Cadani',
+    href: '/ueber-uns',
+    children: [{ label: 'Zertifikate', href: '/zertifikate' }],
   },
-  { label: 'Referenzen', href: '/referenzen/' },
-  { label: 'Wissen', href: '/wissen/' },
-  { label: 'Kontakt', href: '/kontakt/' },
+  { label: 'Konfigurator', href: '/angebot_Solaranlage' },
+  { label: 'Strom & Gas', href: '/strom-gas' },
+  { label: 'Check', href: '/check' },
+  { label: 'Produkte', href: '/produkte' },
+  { label: 'News', href: '/news' },
+  { label: 'Kontakt', href: '/#kontakt' },
 ];
 
 export const footerNavigation: NavigationItem[] = [
