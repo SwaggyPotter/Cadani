@@ -1,0 +1,17 @@
+---
+import SolarInquiryForm from '@components/forms/SolarInquiryForm.astro';
+---
+
+<section class="solar-inquiry" id="kontakt" aria-labelledby="solar-inquiry-heading">
+  <!-- TODO: Bild später lokal in public/images/backgrounds speichern und als WebP/AVIF optimieren -->
+  <div class="solar-inquiry__overlay" aria-hidden="true"></div>
+
+  <div class="container solar-inquiry__inner">
+    <div class="solar-inquiry__header">
+      <p class="solar-inquiry__eyebrow">Ihre neue Solaranlage von Cadani Solarinstallation</p>
+      <h2 class="solar-inquiry__title" id="solar-inquiry-heading">Jetzt anfragen und Angebot sichern!</h2>
+    </div>
+
+    <SolarInquiryForm />
+  </div>
+</section>

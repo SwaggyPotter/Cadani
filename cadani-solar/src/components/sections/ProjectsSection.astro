@@ -1,0 +1,49 @@
+---
+import { projects } from '@data/projects';
+
+const featuredProjects = projects.filter((project) => project.featured);
+---
+
+<section class="projects" aria-labelledby="projects-heading">
+  <div class="container projects__inner">
+    <header class="projects__header">
+      <h2 class="projects__title" id="projects-heading">Ausgewählte Projekte</h2>
+      <p class="projects__intro">
+        Ein Einblick in realisierte Photovoltaik-Projekte von Cadani Solar in Berlin und Brandenburg.
+      </p>
+    </header>
+
+    <!-- TODO: Projektbilder später lokal in public/images/references speichern und als WebP/AVIF optimieren -->
+    <div class="projects__list">
+      {
+        featuredProjects.map((project, index) => (
+          <article class:list={['project-card', index % 2 === 1 && 'project-card--reverse']}>
+            <div class="project-card__media">
+              <img
+                class="project-card__image"
+                src={project.image}
+                alt={project.imageAlt}
+                width="576"
+                height="420"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div class="project-card__content">
+              <span class="project-card__badge">{project.region}</span>
+              <h3 class="project-card__title">{project.title}</h3>
+              <p class="project-card__location">{project.location}</p>
+              <div class="project-card__separator" aria-hidden="true"></div>
+              <ul class="project-card__facts">
+                {project.facts.map((fact) => (
+                  <li>{fact}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

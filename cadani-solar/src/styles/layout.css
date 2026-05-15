@@ -849,6 +849,365 @@
   max-width: 62ch;
 }
 
+.projects {
+  background: var(--color-surface-muted);
+}
+
+.projects__inner {
+  display: grid;
+  gap: clamp(var(--space-2xl), 6vw, var(--space-4xl));
+  padding-block: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+}
+
+.projects__header {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.projects__title {
+  max-width: none;
+  color: var(--color-blue-950);
+}
+
+.projects__intro {
+  margin-inline: auto;
+  font-size: var(--font-size-md);
+}
+
+.projects__list {
+  display: grid;
+  gap: clamp(var(--space-2xl), 6vw, var(--space-4xl));
+}
+
+.project-card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.project-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+}
+
+.project-card__content {
+  display: grid;
+  gap: var(--space-sm);
+  padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+}
+
+.project-card__badge {
+  width: fit-content;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-full);
+  background: rgb(31 157 122 / 0.1);
+  color: var(--color-success);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.project-card__title {
+  color: var(--color-blue-950);
+}
+
+.project-card__location {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.project-card__separator {
+  width: 3.5rem;
+  height: 0.25rem;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+}
+
+.project-card__facts {
+  display: grid;
+  gap: var(--space-xs);
+  padding-inline-start: 1.2rem;
+  margin: 0;
+}
+
+.project-card__facts li {
+  color: var(--color-text-muted);
+}
+
+.references-page__inner {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.references-page__grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.references-page__card {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.references-page__card img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+}
+
+.references-page__card div {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+}
+
+.references-page__card span {
+  width: fit-content;
+  color: var(--color-success);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.references-page__card h2 {
+  max-width: none;
+  font-size: var(--font-size-lg);
+}
+
+.references-page__card ul {
+  display: grid;
+  gap: var(--space-xs);
+  padding-inline-start: 1.2rem;
+  margin: 0;
+}
+
+.solar-inquiry {
+  position: relative;
+  overflow: hidden;
+  background-image: url('https://cdn1.site-media.eu/images/1920/9042672/PHOTO-2024-05-29-22-42-042.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.solar-inquiry__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(7 27 51 / 0.82), rgb(7 27 51 / 0.76)),
+    rgb(7 27 51 / 0.3);
+}
+
+.solar-inquiry__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-xl);
+  justify-items: center;
+  padding-block: clamp(var(--space-3xl), 9vw, var(--space-4xl));
+}
+
+.solar-inquiry__header {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: 48rem;
+  text-align: center;
+}
+
+.solar-inquiry__eyebrow {
+  max-width: none;
+  color: var(--color-yellow-400);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.solar-inquiry__title {
+  max-width: none;
+  color: var(--color-text-inverse);
+}
+
+.solar-form {
+  display: grid;
+  gap: var(--space-lg);
+  width: min(100%, 52.5rem);
+  padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-lg);
+}
+
+.solar-form__progress {
+  display: grid;
+  gap: var(--space-xs);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+.solar-form__progress-track {
+  overflow: hidden;
+  height: 0.625rem;
+  border-radius: var(--radius-full);
+  background: var(--color-gray-200);
+}
+
+.solar-form__progress-bar {
+  display: block;
+  inline-size: 16.6667%;
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--color-success);
+  transition: inline-size 160ms ease;
+}
+
+.solar-form__step {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.solar-form__step legend {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-block-end: var(--space-lg);
+  color: var(--color-blue-950);
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  line-height: var(--line-height-heading);
+}
+
+.solar-form__step legend span {
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+}
+
+.solar-form__options {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.solar-form__options--images {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.solar-form__option {
+  position: relative;
+  display: grid;
+  gap: var(--space-sm);
+  min-width: 0;
+  align-items: center;
+  justify-items: center;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  font-weight: 750;
+  text-align: center;
+}
+
+.solar-form__option:hover,
+.solar-form__option:focus-within {
+  border-color: rgb(31 157 122 / 0.45);
+  box-shadow: var(--shadow-sm);
+}
+
+.solar-form__option:has(input:checked) {
+  border-color: var(--color-success);
+  background: rgb(31 157 122 / 0.08);
+}
+
+.solar-form__option input {
+  position: absolute;
+  inset-block-start: var(--space-sm);
+  inset-inline-start: var(--space-sm);
+}
+
+.solar-form__option img {
+  width: min(100%, 10rem);
+  height: 6.875rem;
+  object-fit: contain;
+}
+
+.solar-form__fields {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.solar-form__fields label {
+  display: grid;
+  gap: var(--space-xs);
+  color: var(--color-text);
+  font-weight: 750;
+}
+
+.solar-form__fields input,
+.solar-form__fields textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+.solar-form__fields textarea {
+  resize: vertical;
+}
+
+.solar-form__privacy {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  font-weight: 500;
+}
+
+.solar-form__privacy a {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.solar-form__actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-sm);
+}
+
+.solar-form__actions .button {
+  width: 100%;
+}
+
+.solar-form__error,
+.solar-form__success {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.solar-form__error {
+  border: 1px solid rgb(185 28 28 / 0.2);
+  background: rgb(185 28 28 / 0.08);
+  color: #991b1b;
+}
+
+.solar-form__success {
+  border: 1px solid rgb(31 157 122 / 0.24);
+  background: rgb(31 157 122 / 0.1);
+  color: var(--color-success);
+}
+
 @keyframes hero-fade-in {
   from {
     opacity: 0;
@@ -924,6 +1283,19 @@
     flex-direction: row;
     align-items: center;
   }
+
+  .solar-form__options:not(.solar-form__options--images) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .solar-form__actions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .solar-form__actions .button {
+    width: fit-content;
+  }
 }
 
 @media (min-width: 56rem) {
@@ -969,6 +1341,29 @@
     box-shadow: var(--shadow-md);
   }
 
+  .project-card {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.9fr);
+    align-items: stretch;
+  }
+
+  .project-card--reverse {
+    grid-template-columns: minmax(22rem, 0.9fr) minmax(0, 1fr);
+  }
+
+  .project-card--reverse .project-card__media {
+    grid-column: 2;
+  }
+
+  .project-card--reverse .project-card__content {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .project-card__image {
+    height: 100%;
+    min-height: 26rem;
+  }
+
   .article-shell--with-sidebar {
     grid-template-columns: minmax(0, var(--container-xs)) minmax(14rem, 18rem);
     align-items: start;
@@ -989,6 +1384,10 @@
 
   .service-benefits__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .references-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

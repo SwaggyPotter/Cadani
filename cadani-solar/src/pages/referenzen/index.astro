@@ -1,18 +1,50 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SeoContentPlaceholder from '@components/sections/SeoContentPlaceholder.astro';
+import { projects } from '@data/projects';
 
-const title = 'Referenzen | Cadani Solar';
-const description = 'Meta Description Platzhalter fuer Referenzen.';
-const h1 = 'H1 Platzhalter Referenzen';
+const title = 'Referenzen & Projekte | Cadani Solar';
+const description =
+  'Ausgewählte Photovoltaik-Projekte von Cadani Solar in Berlin und Brandenburg mit Anlagenleistung, Speicher und Komponenten.';
+const h1 = 'Referenzen & Projekte';
 ---
 
 <BaseLayout title={title} description={description}>
   <main id="main-content">
-    <section class="section" aria-labelledby="page-heading">
-      <div class="container stack">
+    <section class="references-page section" aria-labelledby="page-heading">
+      <div class="container references-page__inner">
         <h1 id="page-heading">{h1}</h1>
-        <p>Platzhalter fuer spaetere Referenzuebersicht.</p>
+        <p>
+          Ein Überblick über realisierte Solaranlagen von Cadani Solar in Berlin und Brandenburg.
+        </p>
+
+        <!-- TODO: Projektbilder später lokal in public/images/references speichern und als WebP/AVIF optimieren -->
+        <div class="references-page__grid">
+          {
+            projects.map((project) => (
+              <article class="references-page__card">
+                <img
+                  src={project.image}
+                  alt={project.imageAlt}
+                  width="576"
+                  height="420"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div>
+                  <span>{project.region}</span>
+                  <h2>{project.title}</h2>
+                  <p>{project.location}</p>
+                  <ul>
+                    {project.facts.map((fact) => (
+                      <li>{fact}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
 

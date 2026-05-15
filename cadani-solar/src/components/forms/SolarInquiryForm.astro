@@ -1,0 +1,214 @@
+---
+import { solarInquirySteps } from '@data/solarInquiry';
+
+const totalSteps = 6;
+---
+
+<form class="solar-form" data-solar-form aria-label="Mehrstufiges Anfrageformular für Solaranlagen" novalidate>
+  <div class="solar-form__progress" aria-live="polite">
+    <span data-step-status>Schritt 1 von {totalSteps}</span>
+    <div class="solar-form__progress-track" aria-hidden="true">
+      <span class="solar-form__progress-bar" data-progress-bar></span>
+    </div>
+  </div>
+
+  <div class="solar-form__error" data-form-error aria-live="polite" hidden></div>
+  <div class="solar-form__success" data-form-success aria-live="polite" hidden>
+    Vielen Dank! Ihre Anfrage wurde vorbereitet. Die technische Anbindung wird im nächsten Schritt ergänzt.
+  </div>
+
+  {
+    solarInquirySteps.map((step, index) => (
+      <fieldset class="solar-form__step" data-step={index + 1} hidden={index !== 0}>
+        <legend>
+          <span>{step.title}</span>
+          {step.question}
+        </legend>
+
+        <div class:list={['solar-form__options', step.id === 'roofType' && 'solar-form__options--images']}>
+          {step.options?.map((option) => (
+            <label class="solar-form__option">
+              <input type="radio" name={step.id} value={option.value} required />
+              {option.image ? (
+                // TODO: Dach-Illustrationen später lokal speichern oder eigene Icons erstellen
+                <img src={option.image} alt={option.imageAlt} width="160" height="110" loading="lazy" decoding="async" />
+              ) : null}
+              <span>{option.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    ))
+  }
+
+  <fieldset class="solar-form__step" data-step="4" hidden>
+    <legend>
+      <span>Standort</span>
+      Wo soll die Solaranlage installiert werden?
+    </legend>
+    <div class="solar-form__fields">
+      <label>
+        <span>Postleitzahl</span>
+        <input type="text" name="postalCode" inputmode="numeric" autocomplete="postal-code" required />
+      </label>
+      <label>
+        <span>Ort</span>
+        <input type="text" name="city" autocomplete="address-level2" required />
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset class="solar-form__step" data-step="5" hidden>
+    <legend>
+      <span>Kontaktdaten</span>
+      Wie können wir Sie erreichen?
+    </legend>
+    <div class="solar-form__fields">
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>E-Mail</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label>
+        <span>Telefonnummer</span>
+        <input type="tel" name="phone" autocomplete="tel" required />
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset class="solar-form__step" data-step="6" hidden>
+    <legend>
+      <span>Nachricht & Absenden</span>
+      Haben Sie weitere Informationen für uns?
+    </legend>
+    <div class="solar-form__fields">
+      <label>
+        <span>Nachricht</span>
+        <textarea name="message" rows="5"></textarea>
+      </label>
+      <label class="solar-form__privacy">
+        <input type="checkbox" name="privacy" required />
+        <span>
+          Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung
+          meiner Angaben zur Kontaktaufnahme zu.
+        </span>
+      </label>
+    </div>
+  </fieldset>
+
+  <div class="solar-form__actions">
+    <button class="button button--secondary" type="button" data-prev-step hidden>Zurück</button>
+    <button class="button button--primary" type="button" data-next-step>Weiter</button>
+    <button class="button button--primary" type="submit" data-submit-form hidden>Anfrage senden</button>
+  </div>
+</form>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-solar-form]');
+
+  forms.forEach((form) => {
+    const totalSteps = 6;
+    let currentStep = 1;
+
+    const steps = Array.from(form.querySelectorAll<HTMLElement>('[data-step]'));
+    const status = form.querySelector<HTMLElement>('[data-step-status]');
+    const progress = form.querySelector<HTMLElement>('[data-progress-bar]');
+    const error = form.querySelector<HTMLElement>('[data-form-error]');
+    const success = form.querySelector<HTMLElement>('[data-form-success]');
+    const previousButton = form.querySelector<HTMLButtonElement>('[data-prev-step]');
+    const nextButton = form.querySelector<HTMLButtonElement>('[data-next-step]');
+    const submitButton = form.querySelector<HTMLButtonElement>('[data-submit-form]');
+
+    const setMessage = (message = '') => {
+      if (!error) return;
+      error.textContent = message;
+      error.hidden = !message;
+    };
+
+    const getCurrentStepElement = () => steps.find((step) => Number(step.dataset.step) === currentStep);
+
+    const showStep = () => {
+      steps.forEach((step) => {
+        step.hidden = Number(step.dataset.step) !== currentStep;
+      });
+
+      if (status) status.textContent = `Schritt ${currentStep} von ${totalSteps}`;
+      if (progress) progress.style.inlineSize = `${(currentStep / totalSteps) * 100}%`;
+      if (previousButton) previousButton.hidden = currentStep === 1;
+      if (nextButton) nextButton.hidden = currentStep === totalSteps;
+      if (submitButton) submitButton.hidden = currentStep !== totalSteps;
+      setMessage();
+    };
+
+    const validateStep = () => {
+      const step = getCurrentStepElement();
+      if (!step) return true;
+
+      const requiredFields = Array.from(step.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'));
+      const radioGroups = new Set(
+        requiredFields.filter((field) => field instanceof HTMLInputElement && field.type === 'radio').map((field) => field.name),
+      );
+
+      for (const groupName of radioGroups) {
+        if (!form.querySelector<HTMLInputElement>(`input[name="${groupName}"]:checked`)) {
+          setMessage('Bitte wählen Sie eine Option aus.');
+          return false;
+        }
+      }
+
+      for (const field of requiredFields) {
+        if (field instanceof HTMLInputElement && field.type === 'radio') continue;
+        if (field instanceof HTMLInputElement && field.type === 'checkbox' && !field.checked) {
+          setMessage('Bitte bestätigen Sie die Datenschutzerklärung.');
+          return false;
+        }
+        if (!field.value.trim()) {
+          setMessage('Bitte füllen Sie alle Pflichtfelder aus.');
+          field.focus();
+          return false;
+        }
+        if (field instanceof HTMLInputElement && field.type === 'email' && !field.validity.valid) {
+          setMessage('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+          field.focus();
+          return false;
+        }
+      }
+
+      return true;
+    };
+
+    nextButton?.addEventListener('click', () => {
+      if (!validateStep()) return;
+      currentStep = Math.min(currentStep + 1, totalSteps);
+      showStep();
+    });
+
+    previousButton?.addEventListener('click', () => {
+      currentStep = Math.max(currentStep - 1, 1);
+      showStep();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!validateStep()) return;
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      console.log('Solar inquiry data', data);
+
+      if (success) success.hidden = false;
+      form.querySelectorAll<HTMLFieldSetElement>('fieldset').forEach((fieldset) => {
+        fieldset.disabled = true;
+      });
+      previousButton?.setAttribute('hidden', '');
+      submitButton?.setAttribute('hidden', '');
+      setMessage();
+    });
+
+    form.addEventListener('change', () => setMessage());
+    showStep();
+  });
+</script>
