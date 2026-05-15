@@ -1,0 +1,157 @@
+.solar-faq {
+  background: linear-gradient(180deg, var(--color-white), var(--color-surface-muted));
+  color: var(--color-text);
+}
+
+.solar-faq__image-band {
+  position: relative;
+  min-height: 13.75rem;
+  background:
+    linear-gradient(135deg, rgb(7 27 51 / 0.64), rgb(31 157 122 / 0.42)),
+    url('/images/sections/solar-faq-background.jpg') center / cover;
+}
+
+.solar-faq__inner {
+  display: grid;
+  gap: clamp(var(--space-xl), 6vw, var(--space-4xl));
+  width: min(100% - (var(--container-padding) * 2), var(--container-lg));
+  margin-inline: auto;
+  padding-block: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+}
+
+.solar-faq__content {
+  display: grid;
+  gap: var(--space-md);
+  align-content: start;
+}
+
+.solar-faq__eyebrow {
+  max-width: none;
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.solar-faq__title {
+  max-width: 14ch;
+  color: var(--color-blue-950);
+}
+
+.solar-faq__intro {
+  max-width: 36rem;
+  font-size: var(--font-size-md);
+}
+
+.solar-faq__accordion {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.solar-faq__item {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: 0 14px 36px rgb(7 27 51 / 0.08);
+}
+
+.solar-faq__question {
+  margin: 0;
+  font-size: var(--font-size-md);
+}
+
+.solar-faq__trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  border: 0;
+  padding: var(--space-lg);
+  background: transparent;
+  color: var(--color-blue-950);
+  font-weight: 800;
+  text-align: start;
+}
+
+.solar-faq__trigger:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -6px;
+}
+
+.solar-faq__icon {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  border-radius: var(--radius-full);
+  background: rgb(31 157 122 / 0.12);
+}
+
+.solar-faq__icon::before,
+.solar-faq__icon::after {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: 0.75rem;
+  height: 0.125rem;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  content: '';
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease;
+}
+
+.solar-faq__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.solar-faq__item.is-open .solar-faq__icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.solar-faq__panel {
+  padding: 0 var(--space-lg) var(--space-lg);
+  animation: solar-faq-open 180ms ease;
+}
+
+.solar-faq__panel p {
+  max-width: 64ch;
+}
+
+@keyframes solar-faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solar-faq__panel {
+    animation: none;
+  }
+
+  .solar-faq__icon::before,
+  .solar-faq__icon::after {
+    transition: none;
+  }
+}
+
+@media (min-width: 48rem) {
+  .solar-faq__image-band {
+    min-height: 20rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .solar-faq__inner {
+    grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
+    align-items: start;
+  }
+}

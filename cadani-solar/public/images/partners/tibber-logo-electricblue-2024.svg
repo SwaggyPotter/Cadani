@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 237" role="img" aria-labelledby="title">
+  <title id="title">Tibber</title>
+  <rect width="512" height="237" rx="32" fill="#ffffff"/>
+  <g fill="#071b33">
+    <path d="M105 58 58 130h43l-20 49 73-83h-45l25-38h-29Z"/>
+    <path d="M197 80h24v24h28v22h-28v54h-24v-54h-20v-22h20V80Z"/>
+    <path d="M271 104h24v76h-24v-76Zm-1-30h26v23h-26V74Z"/>
+    <path d="M324 74h24v39c6-7 15-11 27-11 22 0 39 17 39 40s-17 40-39 40c-12 0-22-4-28-12v10h-23V74Zm45 86c12 0 21-8 21-19s-9-19-21-19-21 8-21 19 9 19 21 19Z"/>
+    <path d="M433 104h23v12c5-8 14-14 27-14v25h-6c-14 0-21 7-21 22v31h-23v-76Z"/>
+  </g>
+</svg>

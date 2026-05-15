@@ -1,6 +1,6 @@
 ---
-import Footer from '@components/layout/Footer.astro';
 import Header from '@components/layout/Header.astro';
+import SiteFooter from '@components/layout/SiteFooter.astro';
 import SEOHead from '@components/seo/SEOHead.astro';
 import { site } from '@data/site';
 import '@styles/global.css';
@@ -49,6 +49,6 @@ const {
     <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
     <Header />
     <slot />
-    <Footer />
+    <SiteFooter />
   </body>
 </html>

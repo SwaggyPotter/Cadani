@@ -1,0 +1,103 @@
+---
+import { solarFaqs } from '@data/faqs';
+import '@styles/components/solar-faq-section.css';
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: solarFaqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<section class="solar-faq" aria-labelledby="solar-faq-heading">
+  <div class="solar-faq__image-band" aria-hidden="true"></div>
+
+  <div class="solar-faq__inner">
+    <div class="solar-faq__content">
+      <p class="solar-faq__eyebrow">FAQ</p>
+      <h2 class="solar-faq__title" id="solar-faq-heading">Fragen rund um Ihre Solaranlage</h2>
+      <p class="solar-faq__intro">
+        Hier beantworten wir die wichtigsten Fragen zu Photovoltaik, Kosten, Wartung und Nutzung Ihrer
+        Solaranlage.
+      </p>
+    </div>
+
+    <div class="solar-faq__accordion" data-solar-faq-accordion>
+      {
+        solarFaqs.map((item, index) => {
+          const buttonId = `solar-faq-trigger-${index + 1}`;
+          const panelId = `solar-faq-panel-${index + 1}`;
+          const isOpen = index === 0;
+
+          return (
+            <article class:list={['solar-faq__item', isOpen && 'is-open']}>
+              <h3 class="solar-faq__question">
+                <button
+                  id={buttonId}
+                  class="solar-faq__trigger"
+                  type="button"
+                  aria-expanded={isOpen ? 'true' : 'false'}
+                  aria-controls={panelId}
+                  data-faq-trigger
+                >
+                  <span>{item.question}</span>
+                  <span class="solar-faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div
+                id={panelId}
+                class="solar-faq__panel"
+                role="region"
+                aria-labelledby={buttonId}
+                data-faq-panel
+                hidden={!isOpen}
+              >
+                <p>{item.answer}</p>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />
+</section>
+
+<script>
+  const accordions = document.querySelectorAll<HTMLElement>('[data-solar-faq-accordion]');
+
+  accordions.forEach((accordion) => {
+    const items = Array.from(accordion.querySelectorAll<HTMLElement>('.solar-faq__item'));
+
+    const setItemOpen = (item: HTMLElement, open: boolean) => {
+      const trigger = item.querySelector<HTMLButtonElement>('[data-faq-trigger]');
+      const panel = item.querySelector<HTMLElement>('[data-faq-panel]');
+      if (!trigger || !panel) return;
+
+      item.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+    };
+
+    items.forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>('[data-faq-trigger]');
+      trigger?.addEventListener('click', () => {
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+        items.forEach((otherItem) => {
+          if (otherItem !== item) setItemOpen(otherItem, false);
+        });
+
+        setItemOpen(item, !isOpen);
+      });
+    });
+  });
+</script>

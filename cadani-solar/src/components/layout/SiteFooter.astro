@@ -1,24 +1,221 @@
 ---
-const footerLinks = [
-  { label: 'Impressum', href: '/impressum' },
-  { label: 'Datenschutz', href: '/datenschutz' },
-];
+import { footerLinks } from '@data/footerLinks';
+import { berlinServiceAreas, brandenburgServiceAreas } from '@data/serviceAreas';
+import '@styles/components/site-footer.css';
+
+const currentYear = new Date().getFullYear();
+const googleMapsHref =
+  'https://www.google.com/maps/search/?api=1&query=Mahlsdorfer%20Str.%2061B%2C%2015366%20Hoppegarten';
+const trustlocalHref =
+  'https://trustlocal.de/brandenburg/h%C3%B6now/photovoltaik-anbieter/cadani-solarinstallation-gmbh/';
+const phoneDisplay = 'Nico Kurzweil - 0152 06 34 17 67';
+const phoneHref = 'tel:+4915206341767';
+const email = 'info@cadani-solar.de';
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Cadani Solarinstallation GmbH',
+  url: 'https://cadani-solar.de/',
+  email,
+  telephone: '+4915206341767',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Mahlsdorfer Str. 61B',
+    postalCode: '15366',
+    addressLocality: 'Hoppegarten',
+    addressRegion: 'Brandenburg',
+    addressCountry: 'DE',
+  },
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Berlin',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Brandenburg',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '9.7',
+    bestRating: '10',
+    ratingCount: '56',
+  },
+};
 ---
 
-<footer class="site-footer">
-  <div class="container site-footer__inner">
-    <p>Cadani Solar</p>
+<footer class="site-footer" aria-labelledby="site-footer-heading">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
-    <nav aria-label="Footer Navigation">
-      <ul>
-        {
-          footerLinks.map((item) => (
-            <li>
-              <a href={item.href}>{item.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <p class="site-footer__eyebrow">Solarinstallation in Berlin & Brandenburg</p>
+        <h2 class="site-footer__title" id="site-footer-heading">Cadani Solarinstallation GmbH</h2>
+        <p class="site-footer__text">
+          Photovoltaik, Stromspeicher und Wallboxen aus einer Hand: persönlich geplant,
+          sauber umgesetzt und regional erreichbar.
+        </p>
+        <div class="site-footer__actions" aria-label="Kontaktoptionen">
+          <a class="site-footer__button site-footer__button--primary" href="/kontakt/">
+            Kostenlose Beratung anfragen
+          </a>
+          <a
+            class="site-footer__button site-footer__button--secondary"
+            href="https://wa.me/DEINE_NUMMER_HIER"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Per WhatsApp schreiben
+          </a>
+        </div>
+      </div>
+
+      <article class="site-footer__trust-card" aria-labelledby="footer-trust-title">
+        <p class="site-footer__trust-kicker">Kundenbewertungen</p>
+        <h3 id="footer-trust-title">Bewertet mit 9,7 / 10</h3>
+        <p>56 Bewertungen über Trustlocal</p>
+        <p>Google: 5,0 Sterne bei 53 Bewertungen</p>
+        <a href={trustlocalHref} target="_blank" rel="noopener noreferrer">
+          Bewertungen bei Trustlocal ansehen
+        </a>
+      </article>
+    </div>
+
+    <div class="site-footer__grid">
+      <section class="site-footer__card site-footer__contact" aria-labelledby="footer-contact-title">
+        <h3 id="footer-contact-title">Kontakt</h3>
+        <address>
+          <strong>Cadani Solarinstallation GmbH</strong>
+          <span>Mahlsdorfer Str. 61B</span>
+          <span>15366 Hoppegarten</span>
+        </address>
+        <dl class="site-footer__contact-list">
+          <div>
+            <dt>Telefon</dt>
+            <dd><a href={phoneHref}>{phoneDisplay}</a></dd>
+          </div>
+          <div>
+            <dt>E-Mail</dt>
+            <dd><a href={`mailto:${email}`}>{email}</a></dd>
+          </div>
+        </dl>
+
+        <div class="site-footer__map-card" aria-labelledby="footer-map-title">
+          <h4 id="footer-map-title">Standort Hoppegarten</h4>
+          <p>Mahlsdorfer Str. 61B, 15366 Hoppegarten</p>
+          <a href={googleMapsHref} target="_blank" rel="noopener noreferrer">
+            Route bei Google Maps öffnen
+          </a>
+          <button type="button" disabled>Karte laden</button>
+        </div>
+      </section>
+
+      <section class="site-footer__card site-footer__form-card" aria-labelledby="footer-form-title">
+        <h3 id="footer-form-title">Kurz anfragen</h3>
+        <form class="site-footer__form" action="/api/contact" method="POST">
+          <div class="site-footer__field site-footer__field--honeypot" aria-hidden="true">
+            <label for="footer-website">Website</label>
+            <input id="footer-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="site-footer__field">
+            <label for="footer-company">Firma <span>optional</span></label>
+            <input id="footer-company" name="company" type="text" autocomplete="organization" />
+          </div>
+
+          <div class="site-footer__field">
+            <label for="footer-name">Name</label>
+            <input id="footer-name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="site-footer__field">
+            <label for="footer-phone">Telefon <span>optional</span></label>
+            <input id="footer-phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+
+          <div class="site-footer__field">
+            <label for="footer-email">E-Mail</label>
+            <input id="footer-email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="site-footer__field">
+            <label for="footer-message">Nachricht</label>
+            <textarea id="footer-message" name="message" rows="4" required></textarea>
+          </div>
+
+          <label class="site-footer__consent" for="footer-privacy">
+            <input id="footer-privacy" name="privacy" type="checkbox" required />
+            <span>
+              Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der
+              Verarbeitung meiner Angaben zur Kontaktaufnahme zu.
+            </span>
+          </label>
+
+          <button class="site-footer__submit" type="submit">Anfrage senden</button>
+        </form>
+      </section>
+
+      <section class="site-footer__card site-footer__regions" aria-labelledby="footer-regions-title">
+        <h3 id="footer-regions-title">Wir sind für Sie da in Berlin und Brandenburg</h3>
+        <p>
+          Cadani Solarinstallation plant und installiert Photovoltaikanlagen für private und
+          gewerbliche Kunden in Berlin, Brandenburg und Umgebung.
+        </p>
+
+        <div class="site-footer__area-groups">
+          <details open>
+            <summary>Berlin</summary>
+            <ul class="site-footer__chips" aria-label="Berliner Bezirke">
+              {
+                berlinServiceAreas.map((area) => (
+                  <li>
+                    <a href={area.href}>{area.name}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+
+          <details>
+            <summary>Brandenburg</summary>
+            <ul class="site-footer__chips" aria-label="Orte in Brandenburg">
+              {
+                brandenburgServiceAreas.map((area) => (
+                  <li>
+                    <a href={area.href}>{area.name}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer Links">
+          <h3>Links</h3>
+          <ul>
+            {
+              footerLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </section>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {currentYear} Cadani Solarinstallation GmbH. Alle Rechte vorbehalten.</p>
+    </div>
   </div>
 </footer>
