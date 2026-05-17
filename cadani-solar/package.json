@@ -14,5 +14,7 @@
     "astro": "^5.18.1",
     "typescript": "^5.9.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@playform/compress": "^0.2.3"
+  }
 }

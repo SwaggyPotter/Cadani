@@ -3,6 +3,9 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-body);
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -24,25 +27,31 @@ h4 {
   color: var(--color-text);
   font-weight: 750;
   line-height: var(--line-height-heading);
+  font-optical-sizing: auto;
+  letter-spacing: -0.025em;
 }
 
 h1 {
   max-width: 13ch;
   font-size: clamp(var(--font-size-2xl), 7vw, var(--font-size-3xl));
   line-height: var(--line-height-tight);
+  letter-spacing: -0.04em;
 }
 
 h2 {
   max-width: 18ch;
   font-size: clamp(var(--font-size-xl), 4.5vw, var(--font-size-2xl));
+  letter-spacing: -0.03em;
 }
 
 h3 {
   font-size: var(--font-size-lg);
+  letter-spacing: -0.02em;
 }
 
 h4 {
   font-size: var(--font-size-md);
+  letter-spacing: -0.015em;
 }
 
 p,

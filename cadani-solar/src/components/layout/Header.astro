@@ -19,7 +19,7 @@ const isActive = (item: NavigationItem) =>
   item.children?.some((child) => normalizePath(child.href) === currentPath);
 ---
 
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="container site-header__inner">
     <a class="site-logo" href="/" aria-label="Cadani Solar Startseite">
       <!-- TODO: Logo spaeter lokal unter public/images/logo/ speichern. -->
@@ -67,6 +67,19 @@ const isActive = (item: NavigationItem) =>
       </ul>
     </nav>
 
+    <a href="/#kontakt" class="button button--primary site-header__cta">Angebot anfragen</a>
+
     <MobileMenu items={navItems} />
   </div>
 </header>
+
+<script>
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 20);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

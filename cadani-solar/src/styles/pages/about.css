@@ -431,8 +431,9 @@
 .cta-section {
   padding-block: clamp(3.5rem, 8vw, 6rem);
   background:
-    radial-gradient(circle at 90% 20%, rgb(247 201 72 / 0.2), transparent 16rem),
-    linear-gradient(135deg, var(--color-blue-950), var(--color-green-700));
+    radial-gradient(ellipse at 92% 15%, rgb(247 201 72 / 0.28), transparent 20rem),
+    radial-gradient(ellipse at 8% 80%, rgb(31 157 122 / 0.18), transparent 18rem),
+    linear-gradient(135deg, var(--color-blue-950) 0%, #0d3052 50%, var(--color-green-700) 100%);
   color: var(--color-white);
 }
 

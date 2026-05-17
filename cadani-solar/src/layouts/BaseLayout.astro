@@ -34,6 +34,19 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,750;0,14..32,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Resource hints for external assets -->
+    <link rel="preconnect" href="https://cdn1.site-media.eu" />
+    <link rel="dns-prefetch" href="https://files.elfsightcdn.com" />
+
     <SEOHead
       title={title}
       description={description}
@@ -50,5 +63,21 @@ const {
     <Header />
     <slot />
     <SiteFooter />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

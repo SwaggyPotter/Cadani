@@ -1,6 +1,8 @@
 @import './variables.css';
 @import './typography.css';
-@import './layout.css';
+@import './layout/primitives.css';
+@import './layout/header.css';
+@import './layout/sections.css';
 @import './utilities.css';
 
 *,
