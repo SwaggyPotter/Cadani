@@ -165,41 +165,8 @@ export const references: ReferenceImage[] = [
     height: 1066,
   },
 
-  // --- Neue Referenzfotos August 2025 ---
-  {
-    src: 'https://cdn1.site-media.eu/images/1200/18767022/PHOTO-2025-08-27-11-46-104-GESXpwWwsJA8VaxT2aYwxQ.jpg',
-    alt: 'Photovoltaikanlage von Cadani Solar, August 2025',
-    title: 'Solarinstallation',
-    location: 'Berlin und Brandenburg',
-    width: 1200,
-    height: 800,
-  },
-  {
-    src: 'https://cdn1.site-media.eu/images/900/18767005/PHOTO-2025-08-27-11-46-085-qYSqSJxV05mJ1H7QqQ1Nww.jpg',
-    alt: 'Solaranlage Detailaufnahme von Cadani Solar, August 2025',
-    title: 'Detailmontage',
-    location: 'Berlin und Brandenburg',
-    width: 900,
-    height: 1200,
-  },
-  {
-    src: 'https://cdn1.site-media.eu/images/1200/18767008/PHOTO-2025-08-27-11-46-087-9q9c4PeC0HAQ4se-g-eMUQ.jpg',
-    alt: 'Photovoltaikanlage auf einem Hausdach, August 2025',
-    title: 'Solaranlage',
-    location: 'Berlin und Brandenburg',
-    width: 1200,
-    height: 800,
-  },
-  {
-    src: 'https://cdn1.site-media.eu/images/900/18767006/PHOTO-2025-08-27-11-46-069-mNSQmkYpMFUu96qkzrcesA.jpg',
-    alt: 'Cadani Solar Installationsdetail, August 2025',
-    title: 'Montagedetail',
-    location: 'Berlin und Brandenburg',
-    width: 900,
-    height: 1200,
-  },
-
-  // TODO: Weitere Fotos vom August 2025 hier ergänzen.
-  // Bitte CDN-URLs aus dem CMS kopieren (IDs: 18766xxx, 21727xxx).
-  // Format: { src: 'https://cdn1.site-media.eu/images/1200/{ID}/{FILENAME}.jpg', alt: '...', title: '...', location: '...', width: 1200, height: 800 }
+  // TODO: Neue Referenzfotos (August 2025+) hier ergänzen.
+  // CDN-URLs bitte aus dem CMS kopieren (Bilder-IDs: 18766xxx, 18767xxx, 21727xxx).
+  // Format-Vorlage:
+  // { src: 'https://cdn1.site-media.eu/images/1200/{ID}/{DATEINAME}.jpg', alt: 'Beschreibung', title: 'Titel', location: 'Ort', width: 1200, height: 800 }
 ];
